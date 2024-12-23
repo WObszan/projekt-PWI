@@ -1,3 +1,5 @@
+import json
+
 class FiltrySortowanie:
 
     def __init__(self, file_name):
@@ -5,7 +7,7 @@ class FiltrySortowanie:
         :param file_name: Nazwa pliku
         '''
         with open(file_name, 'r') as file:
-            self.tasks = file.readlines()
+            self.tasks = json.load(file)
 
     def sort_tasks(self, key, reverse):
         '''
@@ -14,5 +16,16 @@ class FiltrySortowanie:
         :return: Zwraca posortowany słownik
         '''
         return sorted(self.tasks, key=lambda task: task[key], reverse=reverse)
+
+    def filter_tasks_by_date(self, start, end):
+        '''
+        :param start: Początek daty
+        :param end: Koniec daty
+        :return: Zwraca wartości w podanym przedziale daty
+        '''
+        return [task for task in tasks if start <= task['due_date'] <= end]
+
+
+
 
 
