@@ -1,0 +1,42 @@
+{
+    "uzytkownicy": [
+        {
+            "id": 1,
+            "imie": "Anna",
+            "wiek": 29
+        },
+        {
+            "id": 2,
+            "imie": "Piotr",
+            "wiek": 35
+        },
+        {
+            "id": 3,
+            "imie": "Marta",
+            "wiek": 22
+        }
+    ],
+    "zadania": [
+        {
+            "id": 101,
+            "opis": "Nauczyć się obsługi JSON w Pythonie",
+            "priorytet": "wysoki",
+            "wykonane": false
+        },
+        {
+            "id": 102,
+            "opis": "Zrobić zakupy",
+            "priorytet": "średni",
+            "wykonane": true
+        },
+        {
+            "id": 103,
+            "opis": "Napisać artykuł o programowaniu",
+            "priorytet": "niski",
+            "wykonane": false
+        }
+    ]
+
+
+
+}
