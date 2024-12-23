@@ -8,8 +8,9 @@ class FiltrySortowanie:
         :param file_name: Nazwa pliku
         '''
         try:
-            with open(file_name, 'r') as file:
-                self.tasks = json.load(file)
+            with open(file_name, 'r', encoding='utf-8') as file:
+                plik = json.load(file)
+                self.tasks = plik['zadania']
 
             if not isinstance(self.tasks, list):
                 raise ValueError('Plik powinien zawierać listę zadań!')
@@ -31,7 +32,7 @@ class FiltrySortowanie:
         :param end: Koniec daty
         :return: Zwraca wartości w podanym przedziale daty
         '''
-        return [task for task in self.tasks if start <= task['due_date'] <= end]
+        return [task for task in self.tasks if start <= task['termin'] <= end]
 
     def filter_tasks(self, value, key):
         '''
@@ -39,7 +40,8 @@ class FiltrySortowanie:
         :param key: Warunek, po którym będziemy filtrować
         :return: Zwraca przefiltrowany plik
         '''
-        return [task for task in self.tasks if task[value] == key]
+        return [task for task in self.tasks if task.get(value) == key]
 
 filtr = FiltrySortowanie('tasks.json')
-sorted_tasks = filtr.filter_tasks('priorytet', 'wysoki')
+filter = filtr.filter_tasks('priorytet', 'wysoki')
+print("Posortowane zadania:", filter)
