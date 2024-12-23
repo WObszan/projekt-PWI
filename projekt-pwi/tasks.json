@@ -1,42 +1,40 @@
 {
-    "uzytkownicy": [
+    "zadania": [
         {
             "id": 1,
-            "imie": "Anna",
-            "wiek": 29
+            "opis": "Zrobić zakupy spożywcze",
+            "priorytet": "wysoki",
+            "termin": "2024-12-24"
         },
         {
             "id": 2,
-            "imie": "Piotr",
-            "wiek": 35
+            "opis": "Napisać raport kwartalny",
+            "priorytet": "średni",
+            "termin": "2024-12-31"
         },
         {
             "id": 3,
-            "imie": "Marta",
-            "wiek": 22
-        }
-    ],
-    "zadania": [
-        {
-            "id": 101,
-            "opis": "Nauczyć się obsługi JSON w Pythonie",
-            "priorytet": "wysoki",
-            "wykonane": false
-        },
-        {
-            "id": 102,
-            "opis": "Zrobić zakupy",
-            "priorytet": "średni",
-            "wykonane": true
-        },
-        {
-            "id": 103,
-            "opis": "Napisać artykuł o programowaniu",
+            "opis": "Ułożyć plan na nowy projekt",
             "priorytet": "niski",
-            "wykonane": false
+            "termin": "2025-01-15"
+        },
+        {
+            "id": 4,
+            "opis": "Przygotować prezentację na spotkanie",
+            "priorytet": "wysoki",
+            "termin": "2024-12-26"
+        },
+        {
+            "id": 5,
+            "opis": "Zarezerwować wakacje na lato",
+            "priorytet": "niski",
+            "termin": "2025-03-01"
+        },
+        {
+            "id": 6,
+            "opis": "Zrobić przegląd samochodu",
+            "priorytet": "średni",
+            "termin": "2025-01-10"
         }
     ]
-
-
-
 }
