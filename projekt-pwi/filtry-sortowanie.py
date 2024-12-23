@@ -7,8 +7,15 @@ class FiltrySortowanie:
         '''
         :param file_name: Nazwa pliku
         '''
-        with open(file_name, 'r') as file:
-            self.tasks = json.load(file)
+        try:
+            with open(file_name, 'r') as file:
+                self.tasks = json.load(file)
+
+            if not isinstance(self.tasks, list):
+                raise ValueError('Plik powinien zawierać listę zadań!')
+
+        except FileNotFoundError:
+            raise FileNotFoundError(f'Nie znaleziono pliku o nazwie {file_name}')
 
     def sort_tasks(self, key, reverse):
         '''
@@ -32,5 +39,7 @@ class FiltrySortowanie:
         :param key: Warunek, po którym będziemy filtrować
         :return: Zwraca przefiltrowany plik
         '''
-
         return [task for task in self.tasks if task[value] == key]
+
+filtr = FiltrySortowanie('tasks.json')
+sorted_tasks = filtr.filter_tasks('priorytet', 'wysoki')
