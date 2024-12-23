@@ -1,5 +1,6 @@
 import json
 
+
 class FiltrySortowanie:
 
     def __init__(self, file_name):
@@ -23,9 +24,13 @@ class FiltrySortowanie:
         :param end: Koniec daty
         :return: Zwraca wartości w podanym przedziale daty
         '''
-        return [task for task in tasks if start <= task['due_date'] <= end]
+        return [task for task in self.tasks if start <= task['due_date'] <= end]
 
+    def filter_tasks(self, value, key):
+        '''
+        :param value: Co będziemy filtrować
+        :param key: Warunek, po którym będziemy filtrować
+        :return: Zwraca przefiltrowany plik
+        '''
 
-
-
-
+        return [task for task in self.tasks if task[value] == key]
