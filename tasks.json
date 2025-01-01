@@ -18,7 +18,7 @@
         {
             "id": 3,
             "opis": "Ułożyć plan na nowy projekt",
-            "priorytet": "niski",
+            "priorytet": "wysoki",
             "termin": "2025-01-01",
             "email": "wo.playstation@gmail.com"
 

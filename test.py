@@ -16,6 +16,8 @@ class SendingReminder:
 
 
         # set a time to send a reminder#
+        # set a time to send a reminder#
+
     def read_tasks(self, file_path):
         try:
             with open(file_path, "r") as file:
@@ -91,9 +93,10 @@ class SendingReminder:
 ## test ##
 
 if __name__ == "__main__":
+    my_email = "t0.d0.l1st.pwi@gmail.com"
+    app_password = "oidg goxj cgci nqrp"
     user_email = "wo.playstation@gmail.com"
+
     reminder = SendingReminder(my_email, app_password, user_email)
     reminder.check_and_send_reminders("tasks.json")
-
-
 
