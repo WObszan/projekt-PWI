@@ -99,4 +99,3 @@ if __name__ == "__main__":
 
     reminder = SendingReminder(my_email, app_password, user_email)
     reminder.check_and_send_reminders("tasks.json")
-
