@@ -1,5 +1,7 @@
 ### Powiadomienia ###
 import smtplib
+from email.utils import formataddr
+from email.mime.text import MIMEText
 import datetime as dt
 import json
 my_email = "t0.d0.l1st.pwi@gmail.com"
@@ -18,11 +20,15 @@ class SendingReminder:
             with smtplib.SMTP('smtp.gmail.com', 587) as connection:
                 connection.starttls()
                 connection.login(user= my_email, password=app_password)
-                msg = f"Subject: {subject}\n\n{message}".encode('utf-8')
+                msg = MIMEText(message, "plain", "utf-8")
+                msg['Subject'] = subject
+                msg['From'] = formataddr(("To Do List", self.my_email))
+                msg['To'] = self.user_email
+                #msg = f"Subject: {subject}\n\n{message}".encode('utf-8')
                 connection.sendmail(
                     from_addr=my_email,
-                    to_addrs=user_mail,
-                    msg=msg
+                    to_addrs=[user_mail],
+                    msg=msg.as_string()
                 )
             print("Email sent!")
         except Exception as e:
@@ -43,10 +49,9 @@ class SendingReminder:
 
 # Sending Reminders #
     def check_and_send_reminders(self, file_path):
-        """Sprawdza terminy zadań i wysyła przypomnienia dla zadań z dzisiejszą datą."""
+        ###Sprawdza terminy zadań i wysyła przypomnienia dla zadań z dzisiejszą datą.###
         tasks_data = self.read_tasks(file_path)
-        # tasks_topic = tasks_data["zadania"]["opis"]
-        # date_tasks =  tasks_data["zadania"]["termin"]
+
 
         today = dt.date.today().isoformat()
         print(f"Dzisiejsza data: {today}")
@@ -64,7 +69,7 @@ class SendingReminder:
 
 if __name__ == "__main__":
     my_email = "t0.d0.l1st.pwi@gmail.com"
-    app_password = "oidg goxj cgci nqrp"  # Upewnij się, że to jest poprawne hasło aplikacji
+    app_password = "oidg goxj cgci nqrp"
     user_email = "wo.playstation@gmail.com"
 
     reminder = SendingReminder(my_email, app_password, user_email)
