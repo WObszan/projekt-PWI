@@ -4,7 +4,8 @@ from email.utils import formataddr
 from email.mime.text import MIMEText
 import datetime as dt
 import json
-
+import time
+import threading
 my_email = "t0.d0.l1st.pwi@gmail.com"
 app_password = "oidg goxj cgci nqrp"
 file_path = "tasks.json"
@@ -18,6 +19,11 @@ class SendingReminder:
 
         # set a time to send a reminder#
         # set a time to send a reminder#
+
+    def run_in_background(self, file_path):
+        while True:
+            self.check_and_send_reminders(file_path)
+            time.sleep(60)
 
     def read_tasks(self, file_path):
         try:
@@ -69,9 +75,6 @@ class SendingReminder:
         tomorrow = today +  dt.timedelta(days=1)
         godz = dt.datetime.now().strftime("%H:%M")
         print(f"Dzisiejsza data: {today.isoformat()}")
-        print(f"Jutrzejsza: {tomorrow.isoformat()}")
-        print(dt.datetime.now().strftime("%H:%M"))
-
         zadania = tasks_data.get('zadania', [])
         for zadanie in zadania:
             termin = zadanie.get("termin")
@@ -103,6 +106,7 @@ class SendingReminder:
                                 """
                 self.send_email(subject=priorytet, message=message_body, color=color)
 
+
 ## test ##
 
 if __name__ == "__main__":
@@ -111,4 +115,10 @@ if __name__ == "__main__":
     user_email = "wo.playstation@gmail.com"
 
     reminder = SendingReminder(my_email, app_password, user_email)
-    reminder.check_and_send_reminders("tasks.json")
+
+    thread = threading.Thread(target=reminder.run_in_background, args=(file_path,), daemon=True)
+    thread.start()
+
+    while True:
+        time.sleep(1)
+
