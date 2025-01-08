@@ -4,6 +4,7 @@ from email.utils import formataddr
 from email.mime.text import MIMEText
 import datetime as dt
 import json
+
 my_email = "t0.d0.l1st.pwi@gmail.com"
 app_password = "oidg goxj cgci nqrp"
 file_path = "tasks.json"
@@ -64,12 +65,17 @@ class SendingReminder:
         tasks_data = self.read_tasks(file_path)
 
 
-        today = dt.date.today().isoformat()
-        print(f"Dzisiejsza data: {today}")
+        today = dt.date.today()
+        tomorrow = today +  dt.timedelta(days=1)
+        godz = dt.datetime.now().strftime("%H:%M")
+        print(f"Dzisiejsza data: {today.isoformat()}")
+        print(f"Jutrzejsza: {tomorrow.isoformat()}")
+        print(dt.datetime.now().strftime("%H:%M"))
 
         zadania = tasks_data.get('zadania', [])
         for zadanie in zadania:
             termin = zadanie.get("termin")
+            godzina = zadanie.get("godzina")
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
@@ -81,14 +87,21 @@ class SendingReminder:
             else:
                 priorytet = "Reminder:"
                 color = "green"
-            if termin == today:
+            if termin == today.isoformat() and godz == godzina:
                 print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
                 Zadanie: <b>{opis}</b><br>
                 Data: <i>{termin}</i>
                 """
                 self.send_email(subject=priorytet, message=message_body, color=color)
-
+            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
+                print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
+                message_body = f"""
+                                Zadanie na jutro: <b>{opis}</b><br>
+                                Data: <i>{termin}</i>
+                                Godzina: <i>{godz}</i>
+                                """
+                self.send_email(subject=priorytet, message=message_body, color=color)
 
 ## test ##
 
