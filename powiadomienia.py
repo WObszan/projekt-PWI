@@ -11,10 +11,10 @@ app_password = "oidg goxj cgci nqrp"
 file_path = "tasks.json"
 
 class SendingReminder:
-    def __init__(self, my_email, app_password, user_email):
+    def __init__(self, my_email, app_password, file_path):
         self.my_email = my_email
         self.app_password = app_password
-        self.user_email = user_email
+        self.file_path = file_path
 
 
         # set a time to send a reminder#
@@ -37,7 +37,7 @@ class SendingReminder:
         return None
 
     #sending mail#
-    def send_email(self, subject, message, color):
+    def send_email(self, subject, message, color, user_email):
         try:
             with smtplib.SMTP('smtp.gmail.com', 587) as connection:
                 connection.starttls()
@@ -54,11 +54,11 @@ class SendingReminder:
                 msg = MIMEText(html_message, "html", "utf-8")  # Ustawienie typu "html"
                 msg['Subject'] = subject
                 msg['From'] = formataddr(("To Do List", self.my_email))
-                msg['To'] = self.user_email
+                msg['To'] = user_email
 
                 connection.sendmail(
                     from_addr=self.my_email,
-                    to_addrs=[self.user_email],
+                    to_addrs=[user_email],
                     msg=msg.as_string()
                 )
             print("Email sent!")
@@ -77,6 +77,7 @@ class SendingReminder:
         print(f"Dzisiejsza data: {today.isoformat()}")
         zadania = tasks_data.get('zadania', [])
         for zadanie in zadania:
+            email = zadanie.get('email')
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
             opis = zadanie.get("opis")
@@ -96,7 +97,7 @@ class SendingReminder:
                 Zadanie: <b>{opis}</b><br>
                 Data: <i>{termin}</i>
                 """
-                self.send_email(subject=priorytet, message=message_body, color=color)
+                self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
             if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
                 print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
                 message_body = f"""
@@ -104,7 +105,7 @@ class SendingReminder:
                                 Data: <i>{termin}</i>
                                 Godzina: <i>{godz}</i>
                                 """
-                self.send_email(subject=priorytet, message=message_body, color=color)
+                self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
 
 
 ## test ##
@@ -112,9 +113,8 @@ class SendingReminder:
 if __name__ == "__main__":
     my_email = "t0.d0.l1st.pwi@gmail.com"
     app_password = "oidg goxj cgci nqrp"
-    user_email = "wo.playstation@gmail.com"
 
-    reminder = SendingReminder(my_email, app_password, user_email)
+    reminder = SendingReminder(my_email, app_password, file_path)
 
     thread = threading.Thread(target=reminder.run_in_background, args=(file_path,), daemon=True)
     thread.start()
