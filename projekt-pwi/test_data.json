@@ -1,0 +1,78 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "description": "Buy groceries",
+            "priority": "high",
+            "due_date": "2024-12-24",
+            "time": "13:45",
+            "email": "schraderdavid@btcmod.com",
+            "category": "Home",
+            "tags": [
+                "Urgent",
+                "Chores"
+            ]
+        },
+        {
+            "id": 2,
+            "description": "Write quarterly report",
+            "priority": "medium",
+            "due_date": "2024-12-31",
+            "time": "17:15",
+            "email": "xedax86671@chansd.com",
+            "category": "Work",
+            "tags": [
+                "Important"
+            ]
+        },
+        {
+            "id": 3,
+            "description": "Plan a new project",
+            "priority": "high",
+            "due_date": "2025-01-14",
+            "time": "19:53",
+            "email": "wo.playstation@gmail.com",
+            "category": "Work",
+            "tags": [
+                "Urgent"
+            ]
+        },
+        {
+            "id": 4,
+            "description": "Prepare meeting presentation",
+            "priority": "high",
+            "due_date": "2024-12-26",
+            "time": "09:45",
+            "email": "bartek.kowalski@gmail.com",
+            "category": "Work",
+            "tags": [
+                "Urgent",
+                "Team"
+            ]
+        },
+        {
+            "id": 5,
+            "description": "Book summer vacation",
+            "priority": "low",
+            "due_date": "2025-03-01",
+            "time": "15:25",
+            "email": "piotr.lewandowski@gmail.com",
+            "category": "Personal",
+            "tags": [
+                "Fun"
+            ]
+        },
+        {
+            "id": 6,
+            "description": "Car maintenance check",
+            "priority": "high",
+            "due_date": "2025-01-09",
+            "time": "19:45",
+            "email": "ronaldo.cr7@gmail.com",
+            "category": "Personal",
+            "tags": [
+                "Urgent"
+            ]
+        }
+    ]
+}
