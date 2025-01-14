@@ -34,6 +34,14 @@ class FiltrySortowanie:
         '''
         return [task for task in self.tasks if start <= task['termin'] <= end]
 
+    def filter_by_hour(self, start, end):
+        '''
+        :param start: Od której godziny
+        :param end: Do której godziny
+        :return: Zwraca zadania w podanym przedziale czasowym
+        '''
+        return [task for task in self.tasks if start <= task['godzina'] <= end]
+
     def filter_tasks(self, value, key):
         '''
         :param value: Co będziemy filtrować
@@ -41,7 +49,3 @@ class FiltrySortowanie:
         :return: Zwraca przefiltrowany plik
         '''
         return [task for task in self.tasks if task.get(value) == key]
-
-filtr = FiltrySortowanie('tasks.json')
-filter = filtr.filter_tasks('priorytet', 'wysoki')
-print("Posortowane zadania:", filter)
