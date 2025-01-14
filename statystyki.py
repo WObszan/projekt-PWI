@@ -7,7 +7,7 @@ class TaskStats:
             self.data = json.load(file)["zadania"]
     
     def c_by_status(self):
-        status_c = {"do_zrobienia": 0, "w_trakcie": 0, "zrobione": 0}
+        status_c = {"do_zrobienia": 0 "zrobione": 0}
         for task in self.data:
             status_c[task["status"]] += 1
         
@@ -16,9 +16,12 @@ class TaskStats:
     def c_by_categories(self):
         categories_c = {"dom":0, "studia": 0}
         for task in self.data:
-            categories_c[task["kategoria"]] += 1
-
+            if task["kategoria"] in categories_c:
+                categories_c[task["kategoria"]] += 1
+            else:
+                categories_c[task["kategoria"]] = 1
         return categories_c
+    
     def close_to_deadline(self):
         current_date = datetime.now().date()
         deadline = {"do dzisiaj":0,"do jutra": 0, "w tym tygodniu": 0 }
