@@ -6,14 +6,17 @@ import datetime as dt
 import json
 import time
 import threading
-my_email = "t0.d0.l1st.pwi@gmail.com"
-app_password = "oidg goxj cgci nqrp"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 file_path = "tasks.json"
 
 class SendingReminder:
-    def __init__(self, my_email, app_password, file_path):
-        self.my_email = my_email
-        self.app_password = app_password
+    def __init__(self, file_path):
+        self.my_email = os.getenv("MY_EMAIL")
+        self.app_password = os.getenv("APP_PASSWORD")
         self.file_path = file_path
 
 
@@ -111,14 +114,12 @@ class SendingReminder:
 ## test ##
 
 if __name__ == "__main__":
-    my_email = "t0.d0.l1st.pwi@gmail.com"
-    app_password = "oidg goxj cgci nqrp"
 
-    reminder = SendingReminder(my_email, app_password, file_path)
+
+    reminder = SendingReminder( file_path)
 
     thread = threading.Thread(target=reminder.run_in_background, args=(file_path,), daemon=True)
     thread.start()
 
     while True:
         time.sleep(1)
-
