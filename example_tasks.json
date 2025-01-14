@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Jedzenie",
+        "description": "Kupić pierogi w żabce",
+        "due_date": "2025-01-15",
+        "completed": false
+    },
+    {
+        "title": "Nauka",
+        "description": "Zrobić zadania z logiki na poniedziałek",
+        "due_date": "2025-01-20",
+        "completed": false
+    }
+]
