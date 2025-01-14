@@ -4,6 +4,7 @@ from email.utils import formataddr
 from email.mime.text import MIMEText
 import datetime as dt
 import json
+
 import time
 import threading
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ class SendingReminder:
         self.file_path = file_path
 
 
+
         # set a time to send a reminder#
         # set a time to send a reminder#
 
@@ -28,6 +30,8 @@ class SendingReminder:
             self.check_and_send_reminders(file_path)
             time.sleep(60)
 
+
+            
     def read_tasks(self, file_path):
         try:
             with open(file_path, "r") as file:
@@ -40,7 +44,9 @@ class SendingReminder:
         return None
 
     #sending mail#
+
     def send_email(self, subject, message, color, user_email):
+
         try:
             with smtplib.SMTP('smtp.gmail.com', 587) as connection:
                 connection.starttls()
@@ -62,6 +68,7 @@ class SendingReminder:
                 connection.sendmail(
                     from_addr=self.my_email,
                     to_addrs=[user_email],
+
                     msg=msg.as_string()
                 )
             print("Email sent!")
@@ -83,6 +90,7 @@ class SendingReminder:
             email = zadanie.get('email')
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
+
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
@@ -94,12 +102,14 @@ class SendingReminder:
             else:
                 priorytet = "Reminder:"
                 color = "green"
+
             if termin == today.isoformat() and godz == godzina:
                 print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
                 Zadanie: <b>{opis}</b><br>
                 Data: <i>{termin}</i>
                 """
+
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
             if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
                 print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
@@ -109,6 +119,7 @@ class SendingReminder:
                                 Godzina: <i>{godz}</i>
                                 """
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
+
 
 
 ## test ##
@@ -123,3 +134,4 @@ if __name__ == "__main__":
 
     while True:
         time.sleep(1)
+
