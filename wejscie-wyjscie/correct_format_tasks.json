@@ -1,0 +1,58 @@
+
+{
+    "zadania": [
+        {
+            "id": 1,
+            "opis": "Zrobić zakupy spożywcze",
+            "priorytet": "wysoki",
+            "termin": "2024-12-24",
+            "godzina": "13:45",
+            "email": "schraderdavid@btcmod.com"
+
+        },
+        {
+            "id": 2,
+            "opis": "Napisać raport kwartalny",
+            "priorytet": "średni",
+            "termin": "2024-12-31",
+            "godzina": "17:15",
+            "email": "xedax86671@chansd.com"
+        },
+        {
+            "id": 3,
+            "opis": "Ułożyć plan na nowy projekt",
+            "priorytet": "wysoki",
+            "termin": "2025-01-14",
+            "godzina": "19:53",
+            "email": "wo.playstation@gmail.com"
+        },
+        {
+            "id": 4,
+            "opis": "Przygotować prezentację na spotkanie",
+            "priorytet": "wysoki",
+            "termin": "2024-12-26",
+            "godzina": "09:45",
+            "email": "bartek.kowalski@gmail.com"
+
+
+        },
+        {
+            "id": 5,
+            "opis": "Zarezerwować wakacje na lato",
+            "priorytet": "niski",
+            "termin": "2025-03-01",
+            "godzina": "15:25",
+            "email": "piotr.lewandowski@gmail.com"
+
+        },
+        {
+            "id": 6,
+            "opis": "Zrobić przegląd samochodu",
+            "priorytet": "wysoki",
+            "termin": "2025-01-09",
+            "godzina": "19:45",
+            "email": "ronaldo.cr7@gmail.com"
+        }
+    ]
+}
+
