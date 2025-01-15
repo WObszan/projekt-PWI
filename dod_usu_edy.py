@@ -16,7 +16,20 @@ def save_tasks(tasks):
     with open(TASKS_FILE, "w") as file:
         json.dump(tasks, file, indent=4)
 
-
+# Dodawanie nowego zadania
+def add_task(tasks, opis, priorytet, termin, godzina, email):
+    new_id = max([task['id'] for task in tasks], default=0) + 1
+    new_task = {
+        "id": new_id,
+        "opis": opis,
+        "priorytet": priorytet,
+        "termin": termin,
+        "godzina": godzina,
+        "email": email
+    }
+    tasks.append(new_task)
+    save_tasks(tasks)
+    print(f"Dodano zadanie: {new_task}")
 
 
 
@@ -26,7 +39,8 @@ def save_tasks(tasks):
 if __name__ == "__main__":
     tasks = load_tasks()
 
-    
+    # Dodawanie zadania
+    add_task(tasks, "Kupić mleko", "wysoki", "2025-01-20", "10:00", "example@example.com")
     
     
     
