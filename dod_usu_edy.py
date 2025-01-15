@@ -31,7 +31,17 @@ def add_task(tasks, opis, priorytet, termin, godzina, email):
     save_tasks(tasks)
     print(f"Dodano zadanie: {new_task}")
 
-
+# Edycja istniejącego zadania
+def edit_task(tasks, task_id, **kwargs):
+    for task in tasks:
+        if task["id"] == task_id:
+            for key, value in kwargs.items():
+                if key in task:
+                    task[key] = value
+            save_tasks(tasks)
+            print(f"Zadanie o ID {task_id} zostało zmienione.")
+            return
+    print(f"Nie znaleziono zadania o ID {task_id}.")
 
 
 
@@ -41,8 +51,9 @@ if __name__ == "__main__":
 
     # Dodawanie zadania
     add_task(tasks, "Kupić mleko", "wysoki", "2025-01-20", "10:00", "example@example.com")
-    
-    
+    # Edycja zadania
+    edit_task(tasks, 1, opis="Kupić mleko i chleb", godzina="11:00")
+    # Usuwanie zadania
     
     print("Obecne zadania:", load_tasks())
 
