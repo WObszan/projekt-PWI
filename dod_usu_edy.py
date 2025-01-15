@@ -42,6 +42,18 @@ def edit_task(tasks, task_id, **kwargs):
             print(f"Zadanie o ID {task_id} zostało zmienione.")
             return
     print(f"Nie znaleziono zadania o ID {task_id}.")
+#Usuwanie zadania
+def delete_task(tasks, task_id):
+    for task in tasks:
+        if task["id"] == task_id:
+            tasks.remove(task)
+            # Aktualizacja ID zadań
+            for i, task in enumerate(tasks):
+                task["id"] = i + 1
+            save_tasks(tasks)
+            print(f"Usunięto zadanie o ID {task_id}. Zaktualizowano ID pozostałych zadań.")
+            return
+    print(f"Nie znaleziono zadania o ID {task_id}.")
 
 
 
@@ -54,7 +66,8 @@ if __name__ == "__main__":
     # Edycja zadania
     edit_task(tasks, 1, opis="Kupić mleko i chleb", godzina="11:00")
     # Usuwanie zadania
-    
+    delete_task(tasks, 1)
+
     print("Obecne zadania:", load_tasks())
 
 

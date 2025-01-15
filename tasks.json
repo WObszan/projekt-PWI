@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "opis": "Kupi\u0107 mleko",
+        "priorytet": "wysoki",
+        "termin": "2025-01-20",
+        "godzina": "10:00",
+        "email": "example@example.com"
+    }
+]
