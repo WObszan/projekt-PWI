@@ -5,20 +5,23 @@
             "id": 1,
             "opis": "Zrobić zakupy spożywcze",
             "priorytet": "wysoki",
-            "termin": "2024-12-24",
+            "termin": "2025-01-24",
             "godzina": "13:45",
             "email": "schraderdavid@btcmod.com",
-            "status": "zrobione"
+            "status": "zrobione",
+            "kategoria": "dom"
 
         },
         {
             "id": 2,
             "opis": "Napisać raport kwartalny",
             "priorytet": "średni",
-            "termin": "2024-12-31",
+            "termin": "2025-01-20",
             "godzina": "17:15",
             "email": "xedax86671@chansd.com",
-            "status": "zrobione"
+            "status": "zrobione",
+            "kategoria": "praca"
+
 
 
         },
@@ -26,20 +29,24 @@
             "id": 3,
             "opis": "Ułożyć plan na nowy projekt",
             "priorytet": "wysoki",
-            "termin": "2025-01-14",
+            "termin": "2025-01-30",
             "godzina": "19:53",
             "email": "wo.playstation@gmail.com",
-            "status": "nie zrobione"
+            "status": "nie zrobione",
+            "kategoria": "praca"
+
 
         },
         {
             "id": 4,
             "opis": "Przygotować prezentację na spotkanie",
             "priorytet": "wysoki",
-            "termin": "2024-12-26",
+            "termin": "2025-01-17",
             "godzina": "09:45",
             "email": "bartek.kowalski@gmail.com",
-            "status": "zrobione"
+            "status": "zrobione",
+            "kategoria": "praca"
+
 
 
 
@@ -51,7 +58,9 @@
             "termin": "2025-03-01",
             "godzina": "15:25",
             "email": "piotr.lewandowski@gmail.com",
-            "status": "nie zrobione"
+            "status": "nie zrobione",
+            "kategoria": "relaks"
+
 
 
         },
@@ -59,10 +68,12 @@
             "id": 6,
             "opis": "Zrobić przegląd samochodu",
             "priorytet": "wysoki",
-            "termin": "2025-01-09",
+            "termin": "2025-01-18",
             "godzina": "19:45",
             "email": "ronaldo.cr7@gmail.com",
-            "status": "nie zrobione"
+            "status": "nie zrobione",
+            "kategoria": "inne"
+
 
         }
     ]
