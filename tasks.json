@@ -7,7 +7,8 @@
             "priorytet": "wysoki",
             "termin": "2024-12-24",
             "godzina": "13:45",
-            "email": "schraderdavid@btcmod.com"
+            "email": "schraderdavid@btcmod.com",
+            "status": "zrobione"
 
         },
         {
@@ -16,7 +17,10 @@
             "priorytet": "średni",
             "termin": "2024-12-31",
             "godzina": "17:15",
-            "email": "xedax86671@chansd.com"
+            "email": "xedax86671@chansd.com",
+            "status": "zrobione"
+
+
         },
         {
             "id": 3,
@@ -24,7 +28,9 @@
             "priorytet": "wysoki",
             "termin": "2025-01-14",
             "godzina": "19:53",
-            "email": "wo.playstation@gmail.com"
+            "email": "wo.playstation@gmail.com",
+            "status": "nie zrobione"
+
         },
         {
             "id": 4,
@@ -32,7 +38,9 @@
             "priorytet": "wysoki",
             "termin": "2024-12-26",
             "godzina": "09:45",
-            "email": "bartek.kowalski@gmail.com"
+            "email": "bartek.kowalski@gmail.com",
+            "status": "zrobione"
+
 
 
         },
@@ -42,7 +50,9 @@
             "priorytet": "niski",
             "termin": "2025-03-01",
             "godzina": "15:25",
-            "email": "piotr.lewandowski@gmail.com"
+            "email": "piotr.lewandowski@gmail.com",
+            "status": "nie zrobione"
+
 
         },
         {
@@ -51,7 +61,9 @@
             "priorytet": "wysoki",
             "termin": "2025-01-09",
             "godzina": "19:45",
-            "email": "ronaldo.cr7@gmail.com"
+            "email": "ronaldo.cr7@gmail.com",
+            "status": "nie zrobione"
+
         }
     ]
 }
