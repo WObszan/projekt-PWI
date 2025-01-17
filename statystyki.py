@@ -7,14 +7,14 @@ class TaskStats:
             self.data = json.load(file)["zadania"]
     
     def c_by_status(self):
-        status_c = {"do_zrobienia": 0 "zrobione": 0}
+        status_c = {"nie zrobione": 0, "zrobione": 0}
         for task in self.data:
             status_c[task["status"]] += 1
         
         return status_c
     
     def c_by_categories(self):
-        categories_c = {"dom":0, "studia": 0}
+        categories_c = {"dom":0, "studia": 0, "praca": 0, "inne":0}
         for task in self.data:
             if task["kategoria"] in categories_c:
                 categories_c[task["kategoria"]] += 1
@@ -39,3 +39,9 @@ class TaskStats:
                 deadline["w tym tygodniu"] += 1
             if how_many_days >= 2 and how_many_days < 7:
                 deadline["w tym tygodniu"] += 1
+        return deadline
+
+test = TaskStats("tasks.json")
+print(test.close_to_deadline())
+print(test.c_by_categories())
+print(test.c_by_status())
