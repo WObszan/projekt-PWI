@@ -4,20 +4,34 @@ from email.utils import formataddr
 from email.mime.text import MIMEText
 import datetime as dt
 import json
-my_email = "t0.d0.l1st.pwi@gmail.com"
-app_password = "oidg goxj cgci nqrp"
+
+import time
+import threading
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 file_path = "tasks.json"
 
 class SendingReminder:
-    def __init__(self, my_email, app_password, user_email):
-        self.my_email = my_email
-        self.app_password = app_password
-        self.user_email = user_email
+    def __init__(self, file_path):
+        self.my_email = os.getenv("MY_EMAIL")
+        self.app_password = os.getenv("APP_PASSWORD")
+        self.file_path = file_path
+
 
 
         # set a time to send a reminder#
         # set a time to send a reminder#
 
+    def run_in_background(self, file_path):
+        while True:
+            self.check_and_send_reminders(file_path)
+            time.sleep(60)
+
+
+            
     def read_tasks(self, file_path):
         try:
             with open(file_path, "r") as file:
@@ -30,7 +44,9 @@ class SendingReminder:
         return None
 
     #sending mail#
-    def send_email(self, subject, message, color):
+
+    def send_email(self, subject, message, color, user_email):
+
         try:
             with smtplib.SMTP('smtp.gmail.com', 587) as connection:
                 connection.starttls()
@@ -47,11 +63,12 @@ class SendingReminder:
                 msg = MIMEText(html_message, "html", "utf-8")  # Ustawienie typu "html"
                 msg['Subject'] = subject
                 msg['From'] = formataddr(("To Do List", self.my_email))
-                msg['To'] = self.user_email
+                msg['To'] = user_email
 
                 connection.sendmail(
                     from_addr=self.my_email,
-                    to_addrs=[self.user_email],
+                    to_addrs=[user_email],
+
                     msg=msg.as_string()
                 )
             print("Email sent!")
@@ -64,12 +81,16 @@ class SendingReminder:
         tasks_data = self.read_tasks(file_path)
 
 
-        today = dt.date.today().isoformat()
-        print(f"Dzisiejsza data: {today}")
-
+        today = dt.date.today()
+        tomorrow = today +  dt.timedelta(days=1)
+        godz = dt.datetime.now().strftime("%H:%M")
+        print(f"Dzisiejsza data: {today.isoformat()}")
         zadania = tasks_data.get('zadania', [])
         for zadanie in zadania:
+            email = zadanie.get('email')
             termin = zadanie.get("termin")
+            godzina = zadanie.get("godzina")
+
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
@@ -81,24 +102,36 @@ class SendingReminder:
             else:
                 priorytet = "Reminder:"
                 color = "green"
-            if termin == today:
+
+            if termin == today.isoformat() and godz == godzina:
                 print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
                 Zadanie: <b>{opis}</b><br>
                 Data: <i>{termin}</i>
                 """
-                self.send_email(subject=priorytet, message=message_body, color=color)
+
+                self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
+            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
+                print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
+                message_body = f"""
+                                Zadanie na jutro: <b>{opis}</b><br>
+                                Data: <i>{termin}</i>
+                                Godzina: <i>{godz}</i>
+                                """
+                self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
+
 
 
 ## test ##
 
 if __name__ == "__main__":
-    my_email = "t0.d0.l1st.pwi@gmail.com"
-    app_password = "oidg goxj cgci nqrp"
-    user_email = "wo.playstation@gmail.com"
-
-    reminder = SendingReminder(my_email, app_password, user_email)
-    reminder.check_and_send_reminders("tasks.json")
 
 
+    reminder = SendingReminder( file_path)
+
+    thread = threading.Thread(target=reminder.run_in_background, args=(file_path,), daemon=True)
+    thread.start()
+
+    while True:
+        time.sleep(1)
 
