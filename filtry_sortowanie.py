@@ -1,6 +1,5 @@
 import json
 
-
 class FiltrySortowanie:
 
     def __init__(self, file_name):
@@ -10,7 +9,7 @@ class FiltrySortowanie:
         try:
             with open(file_name, 'r', encoding='utf-8') as file:
                 plik = json.load(file)
-                self.tasks = plik['zadania']
+                self.tasks = plik
 
             if not isinstance(self.tasks, list):
                 raise ValueError('Plik powinien zawierać listę zadań!')
@@ -24,7 +23,11 @@ class FiltrySortowanie:
         :param reverse: Wartość, która mówi czy sortujemy rosnąco lub malejąco
         :return: Zwraca posortowany słownik
         '''
-        return sorted(self.tasks, key=lambda task: task[key], reverse=reverse)
+        if key == 'priorytet':
+            priority_order = {'niski': 1, 'średni': 2, 'wysoki': 3}
+            return sorted(self.tasks, key=lambda task: priority_order.get(task[key], 0), reverse=reverse)
+        else:
+            return sorted(self.tasks, key=lambda task: task[key], reverse=reverse)
 
     def filter_tasks_by_date(self, start, end):
         '''
@@ -49,3 +52,5 @@ class FiltrySortowanie:
         :return: Zwraca przefiltrowany plik
         '''
         return [task for task in self.tasks if task.get(value) == key]
+
+
