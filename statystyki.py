@@ -2,10 +2,11 @@ import json
 from datetime import datetime
 
 class TaskStats:
+    #otwieranie pliku .json
     def __init__(self,file):
         with open(file, 'r', encoding='utf-8') as file:
-            self.data = json.load(file)["zadania"]
-    
+            self.data = json.load(file)
+    #iteruje przez zadania z pliku i zlicza wg statusu
     def c_by_status(self):
         status_c = {}
         for task in self.data:
@@ -16,6 +17,7 @@ class TaskStats:
         
         return status_c
     
+    #iteruje przez zadania z pliku i zlicza wg kategorii
     def c_by_categories(self):
         categories_c = {}
         for task in self.data:
@@ -25,6 +27,7 @@ class TaskStats:
                 categories_c[task["kategoria"]] = 1
         return categories_c
     
+    #zlicza ile jeszcze zadan mamy do zrobienia w okreslonym czasie
     def close_to_deadline(self):
         current_date = datetime.now().date()
         current_week = current_date.isocalendar()[1] #numer obecnego tygodnia
@@ -36,13 +39,26 @@ class TaskStats:
             task_week = task_deadline.isocalendar()[1]
             how_many_days = (task_deadline - current_date).days
 
-            if how_many_days == 0:
+            if how_many_days == 0 and task["status"] == "nie zrobione":
                 deadline["dzisiaj"] += 1
-            if how_many_days == 1:
+            if how_many_days == 1 and task["status"] == "nie zrobione":
                 deadline["jutro"] += 1
-            if task_week == current_week:
+            if task_week == current_week and task["status"] == "nie zrobione":
                 deadline["ten tydzień"] += 1
         return deadline
+        # funkcja zapisuje jak duzo wykonujemy zadan z roznych kategorii
+def global_stats(plik,kategoria):
+    with open(plik, "r",encoding="utf-8") as file:
+        data = json.load(file)
+        print(type(data))
+    
+    if kategoria.lower() in data:
+        data[kategoria.lower()] += 1
+    else:
+        data[kategoria.lower()] = 1
+    with open(plik, "w") as file:
+        json.dump(data, file, indent=4)
+    
 
 test = TaskStats("tasks.json")
 #test
