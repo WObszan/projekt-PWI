@@ -90,7 +90,6 @@ class SendingReminder:
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
             status = zadanie.get("status")
-            zrobione = zadanie.get("zrobione")
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
@@ -103,16 +102,16 @@ class SendingReminder:
                 priorytet = "Reminder:"
                 color = "green"
 
-            if termin == today.isoformat() and godz == godzina and zrobione == "nie zrobione":
-                print(f"Wysyłanie przypomnienia dla zadania: {opis}")
+            if termin == today.isoformat() and godz == godzina and status == "nie zrobione":
+                #print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
                 Zadanie: <b>{opis} z kategorii: {status}</b><br>
                 Data: <i>{termin}</i>
                 """
 
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
-            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki" and zrobione == "nie zrobione":
-                print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
+            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki" and status == "nie zrobione":
+                #print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
                 message_body = f"""
                                 Zadanie na jutro: <b>{opis} z kategorii: {status}</b><br>
                                 Data: <i>{termin}</i>
