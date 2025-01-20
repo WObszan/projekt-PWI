@@ -9,7 +9,7 @@ class FiltrySortowanie:
         try:
             with open(file_name, 'r', encoding='utf-8') as file:
                 plik = json.load(file)
-                self.tasks = plik
+                self.tasks = plik['zadania']
 
             if not isinstance(self.tasks, list):
                 raise ValueError('Plik powinien zawierać listę zadań!')
