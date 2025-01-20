@@ -71,7 +71,7 @@ class SendingReminder:
 
                     msg=msg.as_string()
                 )
-            print("Email sent!")
+            #print("Email sent!")
         except Exception as e:
             print(f"Wystąpił błąd podczas wysyłania e-maila: {e}")
 
@@ -90,8 +90,8 @@ class SendingReminder:
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
             status = zadanie.get("status")
-            zrobione = zadanie.get("zrobione")
             opis = zadanie.get("opis")
+            kategoria = zadanie.get("kategoria")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
                 priorytet = "[Wysoki priorytet] REMINDER:"
@@ -103,20 +103,21 @@ class SendingReminder:
                 priorytet = "Reminder:"
                 color = "green"
 
-            if termin == today.isoformat() and godz == godzina and zrobione == "nie zrobione":
-                print(f"Wysyłanie przypomnienia dla zadania: {opis}")
+            if termin == today.isoformat() and godz == godzina and status == "nie zrobione":
+                #print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
-                Zadanie: <b>{opis} z kategorii: {status}</b><br>
-                Data: <i>{termin}</i>
+                Zadanie do zrobienia ---> <b>{opis} </b>
+                Kategoria: <b>{kategoria}</b><br>
+                Termin wykonania: <i>{termin}</i>
                 """
 
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
-            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki" and zrobione == "nie zrobione":
-                print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
+            if termin == tomorrow.isoformat() and godz == godzina and typ_priorytetu == "wysoki" and status == "nie zrobione":
+                #print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
                 message_body = f"""
-                                Zadanie na jutro: <b>{opis} z kategorii: {status}</b><br>
-                                Data: <i>{termin}</i>
-                                Godzina: <i>{godz}</i>
+                                Zadanie na jutro: <b>{opis}</b><br>
+                                Kategoria: <b>{kategoria}</b><br>
+                                Termin wykonania: <i>{termin} o godzinie {godz}.</i>
                                 """
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
 
