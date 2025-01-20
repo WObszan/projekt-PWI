@@ -54,3 +54,16 @@ umożliwia zarządzanie zadaniami zapisanymi w pliku JSON poprzez różne operac
    - Kodowanie UTF-8 dla obsługi znaków specjalnych.
    - Czytelny zapis JSON z wcięciami (indent=4).
    - Domyślna nazwa pliku "tasks.json", którą można zmienić.
+### Klasa TaskStats
+Ten kod umożliwia zarządzanie i analizę zadań w aplikacji typu lista zadań na podstawie danych przechowywanych w pliku JSON. Główne funkcje obejmują:
+
+1. Analiza zadań według statusu
+   - Liczy, ile zadań znajduje się w różnych statusach, np. "zrobione" lub "nie zrobione".
+2. Analiza zadań według kategorii
+   - Liczy, ile zadań przypisano do każdej kategorii, np. "Praca", "Dom" czy "Zdrowie".
+3. Zadania z bliskim terminem wykonania
+   - Oblicza, ile zadań pozostaje do zrobienia w określonych przedziałach czasowych: dzisiaj, jutro i w bieżącym tygodniu.
+4. Śledzenie globalnych statystyk kategorii
+   - Zapisuje dane o wykonanych zadaniach według kategorii w osobnym pliku JSON, umożliwiając późniejszą analizę.
+5. Obliczanie procentowego udziału zadań w kategoriach
+   - Wylicza procent wykonanych zadań dla każdej kategorii i wyświetla wynik w formie czytelnego raportu.
