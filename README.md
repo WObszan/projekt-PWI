@@ -88,3 +88,18 @@ Ten kod umożliwia zarządzanie i analizę zadań w aplikacji typu lista zadań 
 6. Filtrowanie zadań według tagów (filter_tasks_by_tag)
    - Sprawdza, czy podany tag istnieje.
    - Zwraca listę zadań zawierających dany tag.
+
+### Plik dod_usu_edy.py
+1. Ładowanie i zapisywanie zadań
+   - wczytuje zadania z pliku JSON oraz zapisuje je po dokonaniu zmian.
+2. Dodawanie nowych zadań
+   - umożliwia dodanie zadania z unikalnym identyfikatorem, priorytetem, kategorią i terminem.
+3. Edycję zadań
+   - pozwala na modyfikowanie szczegółów istniejącego zadania (np. opisu, godziny).
+4. Usuwanie zadań
+   - usuwa jedno lub wybrane zadania i automatycznie aktualizuje identyfikatory pozostałych zadań.
+5. Usuwanie wszystkich zadań
+   - kasuje wszystkie zadania i zapisuje pustą listę.
+
+Po dodaniu zadania skrypt aktualizuje globalne statystyki za pomocą funkcji global_stats().
+Wspiera priorytety (niski, średni, wysoki) oraz kategorie, a także zapewnia kontrolę nad danymi w formacie JSON.
