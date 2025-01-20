@@ -90,6 +90,7 @@ class SendingReminder:
             email = zadanie.get('email')
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
+            kategoria = zadanie.get("kategoria")
 
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
@@ -106,7 +107,7 @@ class SendingReminder:
             if termin == today.isoformat() and godz == godzina:
                 print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
-                Zadanie: <b>{opis}</b><br>
+                Zadanie: <b>{opis} z kategorii: {kategoria}</b><br>
                 Data: <i>{termin}</i>
                 """
 
@@ -114,7 +115,7 @@ class SendingReminder:
             if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
                 print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
                 message_body = f"""
-                                Zadanie na jutro: <b>{opis}</b><br>
+                                Zadanie na jutro: <b>{opis} z kategorii: {kategoria}</b><br>
                                 Data: <i>{termin}</i>
                                 Godzina: <i>{godz}</i>
                                 """
