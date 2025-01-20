@@ -5,7 +5,7 @@ class TaskStats:
     #otwieranie pliku .json
     def __init__(self,file):
         with open(file, 'r', encoding='utf-8') as file:
-            self.data = json.load(file)
+            self.data = json.load(file)["zadania"]  # Zakładając, że dane są w kluczu "zadania"
     #iteruje przez zadania z pliku i zlicza wg statusu
     def c_by_status(self):
         status_c = {}
