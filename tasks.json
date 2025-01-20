@@ -49,16 +49,6 @@
             "email": "11cas",
             "status": "nie zrobione",
             "kategoria": "1"
-        },
-        {
-            "id": 6,
-            "opis": "nowy",
-            "priorytet": "niski",
-            "termin": "1231-12-12",
-            "godzina": "00:15",
-            "email": "123d",
-            "status": "nie zrobione",
-            "kategoria": "213sd"
         }
     ]
 }
