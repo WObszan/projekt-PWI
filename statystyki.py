@@ -46,11 +46,11 @@ class TaskStats:
             if task_week == current_week and task["status"] == "nie zrobione":
                 deadline["ten tydzień"] += 1
         return deadline
-        # funkcja zapisuje jak duzo wykonujemy zadan z roznych kategorii
+    
+# funkcja zapisuje jak duzo wykonujemy zadan z roznych kategorii
 def global_stats(plik,kategoria):
     with open(plik, "r",encoding="utf-8") as file:
         data = json.load(file)
-        print(type(data))
     
     if kategoria.lower() in data:
         data[kategoria.lower()] += 1
@@ -58,6 +58,17 @@ def global_stats(plik,kategoria):
         data[kategoria.lower()] = 1
     with open(plik, "w") as file:
         json.dump(data, file, indent=4)
+# wylicza procentowo jak duzo zadan kazdej kategorii wykonalismy
+def percentage(plik):
+    with open(plik, "r",encoding="utf-8") as file:
+        data = json.load(file)
+    sum = 0
+    per = {}
+    for category in data:
+        sum += data[category]
+    for category in data:
+        per[category] = int(100 * data[category] / sum)
+        print(category + ": " + str(per[category])+"%")
     
 
 test = TaskStats("tasks.json")
@@ -65,3 +76,4 @@ test = TaskStats("tasks.json")
 print(test.close_to_deadline())
 print(test.c_by_categories())
 print(test.c_by_status())
+percentage("stats.json")
