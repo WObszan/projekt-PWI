@@ -67,3 +67,24 @@ Ten kod umożliwia zarządzanie i analizę zadań w aplikacji typu lista zadań 
    - Zapisuje dane o wykonanych zadaniach według kategorii w osobnym pliku JSON, umożliwiając późniejszą analizę.
 5. Obliczanie procentowego udziału zadań w kategoriach
    - Wylicza procent wykonanych zadań dla każdej kategorii i wyświetla wynik w formie czytelnego raportu.
+### Klasa CategoryTagManager
+1. Dodawanie kategorii (add_category)
+   - Dodaje nową kategorię, jeśli jeszcze nie istnieje.
+   - Sprawdza poprawność nazwy (czy nie jest pusta).
+   - Informuje o dodaniu lub istnieniu kategorii.
+2. Usuwanie kategorii (remove_category)
+   - Usuwa kategorię, jeśli istnieje w zbiorze.
+   - Informuje o wyniku operacji.
+3. Dodawanie tagu (add_tag)
+   - Dodaje nowy tag, jeśli jeszcze nie istnieje.
+   - Sprawdza poprawność nazwy (czy nie jest pusta).
+   - Informuje o dodaniu lub istnieniu tagu.
+4. Usuwanie tagu (remove_tag)
+   - Usuwa tag, jeśli istnieje w zbiorze.
+   - Informuje o wyniku operacji.
+5. Filtrowanie zadań według kategorii (filter_tasks_by_category)
+   - Sprawdza, czy podana kategoria istnieje.
+   - Zwraca listę zadań pasujących do danej kategorii.
+6. Filtrowanie zadań według tagów (filter_tasks_by_tag)
+   - Sprawdza, czy podany tag istnieje.
+   - Zwraca listę zadań zawierających dany tag.
