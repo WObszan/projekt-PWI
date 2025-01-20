@@ -15,7 +15,7 @@ def main():
     filtry_sortowanie = FiltrySortowanie(TASKS_FILE)
     reminder = SendingReminder(TASKS_FILE)
     stats = TaskStats(TASKS_FILE)
-    category_manager = CategoryTagManager()
+    category_manager = CategoryTagManager(TASKS_FILE)
 
     # Start the reminder system in a separate thread
     reminder_thread = threading.Thread(target=reminder.run_in_background, args=(TASKS_FILE,), daemon=True)
