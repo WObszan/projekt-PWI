@@ -40,3 +40,17 @@ umożliwia zarządzanie zadaniami zapisanymi w pliku JSON poprzez różne operac
 4. Działanie programu:
    - Uruchamiane w wątku typu daemon.
    - Nieskończona pętla utrzymująca działanie programu.
+### Klasa WejścieWyjście
+1. Funkcja save_tasks_to_json(tasks, filename="tasks.json")
+   - Zapisuje listę zadań do pliku JSON.
+   - Dane są formatowane i zapisane w pliku w sposób czytelny (z wcięciami).
+   - Obsługuje błędy zapisu i informuje o sukcesie lub problemach.
+2. Funkcja load_tasks_from_json(filename="tasks.json")
+   - Wczytuje listę zadań z pliku JSON.
+   - Obsługuje przypadki braku pliku, błędnego formatu JSON oraz inne błędy.
+   - Zwraca listę zadań lub pustą listę w przypadku problemów.
+3. Kluczowe funkcjonalności klasy:
+   - Obsługa wyjątków (brak pliku, błędny format JSON).
+   - Kodowanie UTF-8 dla obsługi znaków specjalnych.
+   - Czytelny zapis JSON z wcięciami (indent=4).
+   - Domyślna nazwa pliku "tasks.json", którą można zmienić.
