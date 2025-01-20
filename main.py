@@ -60,6 +60,7 @@ def main():
             with open(TASKS_FILE, 'w', encoding='utf-8') as file:
                 json.dump({"zadania": filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
             print("Task added successfully!")
+            category_manager = CategoryTagManager(TASKS_FILE)
 
         elif choice == "2":
             # Remove a task
