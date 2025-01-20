@@ -1,6 +1,5 @@
 import json
 
-
 class FiltrySortowanie:
 
     def __init__(self, file_name):
@@ -10,7 +9,7 @@ class FiltrySortowanie:
         try:
             with open(file_name, 'r', encoding='utf-8') as file:
                 plik = json.load(file)
-                self.tasks = plik['zadania']
+                self.tasks = plik
 
             if not isinstance(self.tasks, list):
                 raise ValueError('Plik powinien zawierać listę zadań!')
@@ -53,4 +52,5 @@ class FiltrySortowanie:
         :return: Zwraca przefiltrowany plik
         '''
         return [task for task in self.tasks if task.get(value) == key]
+
 
