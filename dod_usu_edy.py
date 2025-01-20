@@ -42,7 +42,8 @@ def edit_task(tasks, task_id, **kwargs):
             print(f"Zadanie o ID {task_id} zostało zmienione.")
             return
     print(f"Nie znaleziono zadania o ID {task_id}.")
-#Usuwanie zadania
+
+# Usuwanie zadania
 def delete_task(tasks, task_id):
     for task in tasks:
         if task["id"] == task_id:
@@ -55,7 +56,19 @@ def delete_task(tasks, task_id):
             return
     print(f"Nie znaleziono zadania o ID {task_id}.")
 
+# Usuwanie wszystkich zadań
+def delete_all_tasks():
+    save_tasks([])
+    print("Wszystkie zadania zostały usunięte.")
 
+# Usuwanie wybranych zadań na podstawie listy ID
+def delete_selected_tasks(tasks, ids_to_delete):
+    tasks = [task for task in tasks if task["id"] not in ids_to_delete]
+    # Aktualizacja ID zadań
+    for i, task in enumerate(tasks):
+        task["id"] = i + 1
+    save_tasks(tasks)
+    print(f"Usunięto zadania o ID: {ids_to_delete}. Zaktualizowano ID pozostałych zadań.")
 
 # Przykładowe użycie
 if __name__ == "__main__":
@@ -63,11 +76,26 @@ if __name__ == "__main__":
 
     # Dodawanie zadania
     add_task(tasks, "Kupić mleko", "wysoki", "2025-01-20", "10:00", "example@example.com")
+
     # Edycja zadania
     edit_task(tasks, 1, opis="Kupić mleko i chleb", godzina="11:00")
+
     # Usuwanie zadania
     delete_task(tasks, 1)
 
+    # Usuwanie wszystkich zadań
+    delete_all_tasks()
+
+    # Dodawanie przykładowych zadań
+    add_task(tasks, "Zadanie 1", "niski", "2025-01-15", "12:00", "test1@example.com")
+    add_task(tasks, "Zadanie 2", "średni", "2025-01-16", "13:00", "test2@example.com")
+    add_task(tasks, "Zadanie 3", "wysoki", "2025-01-17", "14:00", "test3@example.com")
+    add_task(tasks, "Zadanie 4", "niski", "2025-01-18", "15:00", "test4@example.com")
+
+    # Usuwanie wybranych zadań
+    delete_selected_tasks(tasks, [2, 4])
+
+    # Wczytanie wszystkich zadań
     print("Obecne zadania:", load_tasks())
 
 
