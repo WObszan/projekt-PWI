@@ -84,14 +84,13 @@ class SendingReminder:
         today = dt.date.today()
         tomorrow = today +  dt.timedelta(days=1)
         godz = dt.datetime.now().strftime("%H:%M")
-        print(f"Dzisiejsza data: {today.isoformat()}")
         zadania = tasks_data.get('zadania', [])
         for zadanie in zadania:
             email = zadanie.get('email')
             termin = zadanie.get("termin")
             godzina = zadanie.get("godzina")
             kategoria = zadanie.get("kategoria")
-
+            zrobione = zadanie.get("zrobione")
             opis = zadanie.get("opis")
             typ_priorytetu = zadanie.get("priorytet")
             if typ_priorytetu == "wysoki":
@@ -104,7 +103,7 @@ class SendingReminder:
                 priorytet = "Reminder:"
                 color = "green"
 
-            if termin == today.isoformat() and godz == godzina:
+            if termin == today.isoformat() and godz == godzina and zrobione == "Nie":
                 print(f"Wysyłanie przypomnienia dla zadania: {opis}")
                 message_body = f"""
                 Zadanie: <b>{opis} z kategorii: {kategoria}</b><br>
@@ -112,7 +111,7 @@ class SendingReminder:
                 """
 
                 self.send_email(subject=priorytet, message=message_body, color=color, user_email=email)
-            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki":
+            if termin == tomorrow.isoformat() and typ_priorytetu == "wysoki" and zrobione == "Nie":
                 print(f"Wysyłanie przypomnienia dla jutrzejszego zadania: {opis}")
                 message_body = f"""
                                 Zadanie na jutro: <b>{opis} z kategorii: {kategoria}</b><br>
