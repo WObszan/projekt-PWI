@@ -1,10 +1,11 @@
 import json
 import os
+from statystyki import global_stats
 
 # Plik JSON do przechowywania danych
 TASKS_FILE = "tasks.json"
-
 # Funkcja do wczytywania danych z pliku JSON
+
 def load_tasks():
     if not os.path.exists(TASKS_FILE):
         return []
@@ -16,8 +17,9 @@ def save_tasks(tasks):
     with open(TASKS_FILE, "w") as file:
         json.dump(tasks, file, indent=4)
 
+
 # Dodawanie nowego zadania
-def add_task(tasks, opis, priorytet, termin, godzina, email):
+def add_task(tasks, opis, priorytet, termin, godzina, email, kategoria):
     new_id = max([task['id'] for task in tasks], default=0) + 1
     new_task = {
         "id": new_id,
@@ -25,11 +27,15 @@ def add_task(tasks, opis, priorytet, termin, godzina, email):
         "priorytet": priorytet,
         "termin": termin,
         "godzina": godzina,
-        "email": email
+        "email": email,
+        "status": "nie zrobione", #ustawilem status zadania na nie zrobione po dodaniu
+        "kategoria": kategoria #dodalem kategorie
     }
     tasks.append(new_task)
-    save_tasks(tasks)
     print(f"Dodano zadanie: {new_task}")
+    save_tasks(tasks)
+    global_stats("stats.json",new_task["kategoria"]) #dodaje nowe zadanie do globalnych funckji
+    
 
 # Edycja istniejącego zadania
 def edit_task(tasks, task_id, **kwargs):
@@ -73,11 +79,10 @@ def delete_selected_tasks(tasks, ids_to_delete):
 # Przykładowe użycie
 if __name__ == "__main__":
     tasks = load_tasks()
-
+    
     # Dodawanie zadania
-    add_task(tasks, "Kupić mleko", "wysoki", "2025-01-20", "10:00", "example@example.com")
-
-    # Edycja zadania
+    add_task(tasks, "Kupić mleko", "wysoki", "2025-01-20", "10:00", "example@example.com","dom",)
+    #Edycja zadania
     edit_task(tasks, 1, opis="Kupić mleko i chleb", godzina="11:00")
 
     # Usuwanie zadania
@@ -87,10 +92,10 @@ if __name__ == "__main__":
     delete_all_tasks()
 
     # Dodawanie przykładowych zadań
-    add_task(tasks, "Zadanie 1", "niski", "2025-01-15", "12:00", "test1@example.com")
-    add_task(tasks, "Zadanie 2", "średni", "2025-01-16", "13:00", "test2@example.com")
-    add_task(tasks, "Zadanie 3", "wysoki", "2025-01-17", "14:00", "test3@example.com")
-    add_task(tasks, "Zadanie 4", "niski", "2025-01-18", "15:00", "test4@example.com")
+    add_task(tasks, "Zadanie 1", "niski", "2025-01-15", "12:00", "test1@example.com","dom")
+    add_task(tasks, "Zadanie 2", "średni", "2025-01-16", "13:00", "test2@example.com","praca")
+    add_task(tasks, "Zadanie 3", "wysoki", "2025-01-17", "14:00", "test3@example.com","praca")
+    add_task(tasks, "Zadanie 4", "niski", "2025-01-18", "15:00", "test4@example.com","hoBby")
 
     # Usuwanie wybranych zadań
     delete_selected_tasks(tasks, [2, 4])

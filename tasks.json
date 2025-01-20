@@ -1,81 +1,42 @@
-
-{
-    "zadania": [
-        {
-            "id": 1,
-            "opis": "Zrobić zakupy spożywcze",
-            "priorytet": "wysoki",
-            "termin": "2025-01-24",
-            "godzina": "13:45",
-            "email": "schraderdavid@btcmod.com",
-            "status": "zrobione",
-            "kategoria": "dom"
-
-        },
-        {
-            "id": 2,
-            "opis": "Napisać raport kwartalny",
-            "priorytet": "średni",
-            "termin": "2025-01-20",
-            "godzina": "17:15",
-            "email": "xedax86671@chansd.com",
-            "status": "zrobione",
-            "kategoria": "praca"
-
-
-
-        },
-        {
-            "id": 3,
-            "opis": "Ułożyć plan na nowy projekt",
-            "priorytet": "wysoki",
-            "termin": "2025-01-30",
-            "godzina": "19:53",
-            "email": "wo.playstation@gmail.com",
-            "status": "nie zrobione",
-            "kategoria": "praca"
-
-
-        },
-        {
-            "id": 4,
-            "opis": "Przygotować prezentację na spotkanie",
-            "priorytet": "wysoki",
-            "termin": "2025-01-17",
-            "godzina": "09:45",
-            "email": "bartek.kowalski@gmail.com",
-            "status": "zrobione",
-            "kategoria": "praca"
-
-
-
-
-        },
-        {
-            "id": 5,
-            "opis": "Zarezerwować wakacje na lato",
-            "priorytet": "niski",
-            "termin": "2025-03-01",
-            "godzina": "15:25",
-            "email": "piotr.lewandowski@gmail.com",
-            "status": "nie zrobione",
-            "kategoria": "relaks"
-
-
-
-        },
-        {
-            "id": 6,
-            "opis": "Zrobić przegląd samochodu",
-            "priorytet": "wysoki",
-            "termin": "2025-01-18",
-            "godzina": "19:45",
-            "email": "ronaldo.cr7@gmail.com",
-            "status": "nie zrobione",
-            "kategoria": "inne"
-
-
-        }
-    ]
-}
-
+[
+    {
+        "id": 1,
+        "opis": "Zadanie 3",
+        "priorytet": "wysoki",
+        "termin": "2025-01-17",
+        "godzina": "14:00",
+        "email": "test3@example.com",
+        "status": "nie zrobione",
+        "kategoria": "praca"
+    },
+    {
+        "id": 2,
+        "opis": "Zadanie 1",
+        "priorytet": "niski",
+        "termin": "2025-01-15",
+        "godzina": "12:00",
+        "email": "test1@example.com",
+        "status": "nie zrobione",
+        "kategoria": "dom"
+    },
+    {
+        "id": 3,
+        "opis": "Zadanie 3",
+        "priorytet": "wysoki",
+        "termin": "2025-01-17",
+        "godzina": "14:00",
+        "email": "test3@example.com",
+        "status": "nie zrobione",
+        "kategoria": "praca"
+    },
+    {
+        "id": 4,
+        "opis": "Zadanie 4",
+        "priorytet": "niski",
+        "termin": "2025-01-18",
+        "godzina": "15:00",
+        "email": "test4@example.com",
+        "status": "nie zrobione",
+        "kategoria": "hoBby"
+    }
+]
