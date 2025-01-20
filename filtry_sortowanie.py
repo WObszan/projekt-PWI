@@ -11,7 +11,7 @@ class FiltrySortowanie:
                 plik = json.load(file)
                 self.tasks = plik
 
-            if not isinstance(self.tasks, dict):
+            if not isinstance(self.tasks, list):
                 raise ValueError('Plik powinien zawierać listę zadań!')
 
         except FileNotFoundError:
