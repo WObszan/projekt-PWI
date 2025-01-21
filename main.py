@@ -287,12 +287,17 @@ class TaskManagerApp:
         pass
 
     def refresh_task_list(self):
+        # Czyszczenie obecnych wpisów w widoku drzewa
         for item in self.task_tree.get_children():
             self.task_tree.delete(item)
+
+        # Dodawanie tylko zadań, które nie są ukończone
         for task in self.filtry_sortowanie.tasks:
-            self.task_tree.insert("", tk.END, values=(
-                task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"], task["kategoria"]
-            ))
+            if task["status"] != "completed":
+                self.task_tree.insert("", tk.END, values=(
+                    task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"],
+                    task["kategoria"]
+                ))
 
     def set_default_email(self):
         # Prompt the user to input a new default email
