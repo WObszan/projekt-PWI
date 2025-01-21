@@ -75,9 +75,9 @@ def percentage(plik):
         print(category + ": " + str(per[category])+"%")
 
 
-test = TaskStats("tasks.json")
-#test
-print(test.close_to_deadline())
+# test = TaskStats("tasks.json")
+# #test
+# print(test.close_to_deadline())
 # print(test.c_by_categories())
 # print(test.c_by_status())
 # percentage("stats.json")
