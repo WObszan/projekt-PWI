@@ -43,12 +43,11 @@ class TaskStats:
             task_deadline = datetime.strptime(task_deadline,"%Y-%m-%d").date()
             task_week = task_deadline.isocalendar()[1]
             how_many_days = (task_deadline - current_date).days
-
-            if how_many_days == 0 and task["status"] == "nie zrobione":
+            if how_many_days == 0 and task["status"] == "not completed":
                 deadline["dzisiaj"] += 1
-            if how_many_days == 1 and task["status"] == "nie zrobione":
+            if how_many_days == 1 and task["status"] == "not completed":
                 deadline["jutro"] += 1
-            if task_week == current_week and task["status"] == "nie zrobione":
+            if task_week == current_week and task["status"] == "not completed":
                 deadline["ten tydzień"] += 1
         return deadline
     
@@ -75,11 +74,12 @@ def percentage(plik):
         per[category] = int(100 * data[category] / sum)
         print(category + ": " + str(per[category])+"%")
 
-'''
+
 test = TaskStats("tasks.json")
 #test
 print(test.close_to_deadline())
-print(test.c_by_categories())
-print(test.c_by_status())
-percentage("stats.json")
-'''
+# print(test.c_by_categories())
+# print(test.c_by_status())
+# percentage("stats.json")
+
+
