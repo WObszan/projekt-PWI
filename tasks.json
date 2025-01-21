@@ -7,7 +7,7 @@
             "termin": "2025-01-25",
             "godzina": "09:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "not completed",
             "kategoria": "Work"
         },
         {
@@ -17,7 +17,7 @@
             "termin": "2025-01-22",
             "godzina": "16:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "not completed",
             "kategoria": "Personal"
         },
         {
@@ -27,7 +27,7 @@
             "termin": "2025-01-23",
             "godzina": "18:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "not completed",
             "kategoria": "Study"
         },
         {
@@ -37,7 +37,7 @@
             "termin": "2025-01-24",
             "godzina": "11:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "not completed",
             "kategoria": "Work"
         },
         {
@@ -47,7 +47,7 @@
             "termin": "2025-01-21",
             "godzina": "08:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "not completed",
             "kategoria": "Personal"
         },
         {
@@ -57,7 +57,7 @@
             "termin": "2025-01-21",
             "godzina": "20:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Personal"
         },
         {
@@ -67,7 +67,7 @@
             "termin": "2025-01-25",
             "godzina": "14:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Work"
         },
         {
@@ -77,7 +77,7 @@
             "termin": "2025-01-22",
             "godzina": "07:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Health"
         },
         {
@@ -97,7 +97,7 @@
             "termin": "2025-01-23",
             "godzina": "10:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Home"
         },
         {
@@ -117,7 +117,7 @@
             "termin": "2025-01-21",
             "godzina": "12:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Home"
         },
         {
@@ -127,7 +127,7 @@
             "termin": "2025-01-23",
             "godzina": "09:30",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Personal"
         },
         {
@@ -137,7 +137,7 @@
             "termin": "2025-01-26",
             "godzina": "16:00",
             "email": "common.email@example.com",
-            "status": "nie zrobione",
+            "status": "completed",
             "kategoria": "Leisure"
         },
         {
@@ -169,6 +169,56 @@
             "email": "common.email@example.com",
             "status": "completed",
             "kategoria": "Home"
+        },
+        {
+            "id": 18,
+            "opis": "test",
+            "priorytet": "średni",
+            "termin": "2021-12-21",
+            "godzina": "22:22",
+            "email": "common.email@example.com",
+            "status": "not completed",
+            "kategoria": "Pwi"
+        },
+        {
+            "id": 19,
+            "opis": "Test",
+            "priorytet": "wysoki",
+            "termin": "2025-01-21",
+            "godzina": "18:51",
+            "email": "common.email@example.com",
+            "status": "not completed",
+            "kategoria": "Pwi"
+        },
+        {
+            "id": 20,
+            "opis": "Test3",
+            "priorytet": "średni",
+            "termin": "2025-01-21",
+            "godzina": "18:52",
+            "email": "obszanskiwojciech@gmail.com",
+            "status": "not completed",
+            "kategoria": "Pwi"
+        },
+        {
+            "id": 21,
+            "opis": "Test3",
+            "priorytet": "wysoki",
+            "termin": "2025-01-21",
+            "godzina": "18:57",
+            "email": "obszanskiwojciech@gmail.com",
+            "status": "not completed",
+            "kategoria": "Personal"
+        },
+        {
+            "id": 22,
+            "opis": "Ostateczny test",
+            "priorytet": "wysoki",
+            "termin": "2025-01-21",
+            "godzina": "18:59",
+            "email": "obszanskiwojciech@gmail.com",
+            "status": "not completed",
+            "kategoria": "Study"
         }
     ]
 }
