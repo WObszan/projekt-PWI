@@ -2,123 +2,173 @@
     "zadania": [
         {
             "id": 1,
-            "opis": "Zadanie 3",
+            "opis": "Finish project report",
             "priorytet": "wysoki",
-            "termin": "2025-01-17",
-            "godzina": "14:00",
-            "email": "test3@example.com",
+            "termin": "2025-01-25",
+            "godzina": "09:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "praca"
+            "kategoria": "Work"
         },
         {
             "id": 2,
-            "opis": "Zadanie 1",
-            "priorytet": "niski",
-            "termin": "2025-01-15",
-            "godzina": "12:00",
-            "email": "test1@example.com",
+            "opis": "Buy groceries",
+            "priorytet": "średni",
+            "termin": "2025-01-22",
+            "godzina": "16:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "dom"
+            "kategoria": "Personal"
         },
         {
             "id": 3,
-            "opis": "Zadanie 3",
+            "opis": "Complete math homework",
             "priorytet": "wysoki",
-            "termin": "2025-01-17",
-            "godzina": "14:00",
-            "email": "test3@example.com",
+            "termin": "2025-01-23",
+            "godzina": "18:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "praca"
+            "kategoria": "Study"
         },
         {
             "id": 4,
-            "opis": "Zadanie 4",
-            "priorytet": "niski",
-            "termin": "2025-01-18",
-            "godzina": "15:00",
-            "email": "test4@example.com",
+            "opis": "Prepare for meeting",
+            "priorytet": "wysoki",
+            "termin": "2025-01-24",
+            "godzina": "11:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "hoBby"
+            "kategoria": "Work"
         },
         {
             "id": 5,
-            "opis": "Test",
-            "priorytet": "wysoki",
-            "termin": "1111-11-11",
-            "godzina": "11:11",
-            "email": "11cas",
+            "opis": "Walk the dog",
+            "priorytet": "niski",
+            "termin": "2025-01-21",
+            "godzina": "08:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "1"
+            "kategoria": "Personal"
         },
         {
             "id": 6,
-            "opis": "test",
-            "priorytet": "wysoki",
-            "termin": "2222-12-12",
-            "godzina": "23:23",
-            "email": "dsfsdf",
+            "opis": "Call mom",
+            "priorytet": "średni",
+            "termin": "2025-01-21",
+            "godzina": "20:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "koty"
+            "kategoria": "Personal"
         },
         {
             "id": 7,
-            "opis": "test2",
-            "priorytet": "wysoki",
-            "termin": "2025-01-22",
-            "godzina": "23:23",
-            "email": "sfa",
+            "opis": "Write blog post",
+            "priorytet": "średni",
+            "termin": "2025-01-25",
+            "godzina": "14:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "psy"
+            "kategoria": "Work"
         },
         {
             "id": 8,
-            "opis": "test3",
-            "priorytet": "wysoki",
-            "termin": "2025-01-21",
-            "godzina": "23:33",
-            "email": "asdf",
+            "opis": "Attend yoga class",
+            "priorytet": "niski",
+            "termin": "2025-01-22",
+            "godzina": "07:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "sport"
+            "kategoria": "Health"
         },
         {
             "id": 9,
-            "opis": "test4",
-            "priorytet": "wysoki",
-            "termin": "2022-12-12",
-            "godzina": "23:33",
-            "email": "asdf",
-            "status": "nie zrobione",
-            "kategoria": "test"
+            "opis": "Prepare dinner",
+            "priorytet": "średni",
+            "termin": "2025-01-22",
+            "godzina": "19:00",
+            "email": "common.email@example.com",
+            "status": "completed",
+            "kategoria": "Personal"
         },
         {
             "id": 10,
-            "opis": "test4",
-            "priorytet": "wysoki",
-            "termin": "2222-12-12",
-            "godzina": "23:23",
-            "email": "sfd",
+            "opis": "Clean the house",
+            "priorytet": "niski",
+            "termin": "2025-01-23",
+            "godzina": "10:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "testowanie"
+            "kategoria": "Home"
         },
         {
             "id": 11,
-            "opis": "asdf",
-            "priorytet": "wysoki",
-            "termin": "2023-12-12",
-            "godzina": "12:23",
-            "email": "adsf",
-            "status": "nie zrobione",
-            "kategoria": "testy"
+            "opis": "Read a book",
+            "priorytet": "niski",
+            "termin": "2025-01-26",
+            "godzina": "15:00",
+            "email": "common.email@example.com",
+            "status": "completed",
+            "kategoria": "Leisure"
         },
         {
             "id": 12,
-            "opis": "sf",
-            "priorytet": "saf",
-            "termin": "asdf",
-            "godzina": "safd",
-            "email": "safd",
+            "opis": "Fix the broken sink",
+            "priorytet": "wysoki",
+            "termin": "2025-01-21",
+            "godzina": "12:00",
+            "email": "common.email@example.com",
             "status": "nie zrobione",
-            "kategoria": "asfd"
+            "kategoria": "Home"
+        },
+        {
+            "id": 13,
+            "opis": "Grocery shopping",
+            "priorytet": "średni",
+            "termin": "2025-01-23",
+            "godzina": "09:30",
+            "email": "common.email@example.com",
+            "status": "nie zrobione",
+            "kategoria": "Personal"
+        },
+        {
+            "id": 14,
+            "opis": "Take a break",
+            "priorytet": "niski",
+            "termin": "2025-01-26",
+            "godzina": "16:00",
+            "email": "common.email@example.com",
+            "status": "nie zrobione",
+            "kategoria": "Leisure"
+        },
+        {
+            "id": 15,
+            "opis": "Organize desk",
+            "priorytet": "średni",
+            "termin": "2025-01-23",
+            "godzina": "09:00",
+            "email": "common.email@example.com",
+            "status": "completed",
+            "kategoria": "Work"
+        },
+        {
+            "id": 16,
+            "opis": "nowe",
+            "priorytet": "wysoki",
+            "termin": "2025-11-11",
+            "godzina": "22:22",
+            "email": "gu.email@gmail.com",
+            "status": "completed",
+            "kategoria": "home"
+        },
+        {
+            "id": 17,
+            "opis": "q",
+            "priorytet": "wysoki",
+            "termin": "2222-12-22",
+            "godzina": "22:22",
+            "email": "common.email@example.com",
+            "status": "completed",
+            "kategoria": "Home"
         }
     ]
 }
