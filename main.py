@@ -120,7 +120,7 @@ class TaskManagerApp:
                 deadline = deadline_entry.get()
                 time = time_entry.get()
                 category = category_entry.get()
-                status = "nie zrobione"
+                status = "not completed"
 
                 # Validate inputs
                 datetime.strptime(deadline, "%Y-%m-%d")  # Validate date
