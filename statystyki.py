@@ -7,6 +7,11 @@ class TaskStats:
         with open(file, 'r', encoding='utf-8') as file:
             self.data = json.load(file)["zadania"]  # Zakładając, że dane są w kluczu "zadania"
     #iteruje przez zadania z pliku i zlicza wg statusu
+    def update(self, file=None):
+        if file is None:
+            file = self.file
+        with open(file, 'r', encoding='utf-8') as file:
+            self.data = json.load(file)["zadania"]
     def c_by_status(self):
         status_c = {}
         for task in self.data:
@@ -61,7 +66,7 @@ def global_stats(plik,kategoria):
 # wylicza procentowo jak duzo zadan kazdej kategorii wykonalismy
 def percentage(plik):
     with open(plik, "r",encoding="utf-8") as file:
-        data = json.load(file)
+        data = json.load(file)["zadania"]
     sum = 0
     per = {}
     for category in data:
@@ -69,7 +74,7 @@ def percentage(plik):
     for category in data:
         per[category] = int(100 * data[category] / sum)
         print(category + ": " + str(per[category])+"%")
-    
+
 '''
 test = TaskStats("tasks.json")
 #test
