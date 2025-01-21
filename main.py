@@ -46,7 +46,7 @@ class TaskManagerApp:
         tk.Button(button_frame, text="Add Task", command=self.add_task_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Remove Task", command=self.remove_task_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Filter Tasks by Key", command=self.filter_tasks_window, width=20).pack(pady=5)
-        tk.Button(button_frame, text="Filter Tasks by Date", command=self.filter_tasks_window, width=20).pack(pady=5)
+        tk.Button(button_frame, text="Filter Tasks by Date", command=self.filter_tasks_date_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Sort Tasks", command=self.sort_tasks_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Task Statistics", command=self.view_statistics, width=20).pack(pady=5)
         tk.Button(button_frame, text="Manage Categories", command=self.manage_categories_window, width=20).pack(pady=5)
@@ -284,8 +284,51 @@ class TaskManagerApp:
         pass
 
     def filter_tasks_date_window(self):
-        # Implement filtering functionality here
-        pass
+        window = tk.Toplevel(self.root)
+        window.title("Filter Tasks by Date Range")
+        window.geometry("300x250")
+
+        tk.Label(window, text="Select Start Date:").pack(pady=5)
+
+        # DateEntry widget to select start date
+        start_date_entry = DateEntry(window, width=12, background='darkblue', foreground='white', borderwidth=2)
+        start_date_entry.pack(pady=5)
+
+        tk.Label(window, text="Select End Date:").pack(pady=5)
+
+        # DateEntry widget to select end date
+        end_date_entry = DateEntry(window, width=12, background='darkblue', foreground='white', borderwidth=2)
+        end_date_entry.pack(pady=5)
+
+        def apply_filter():
+            try:
+                # Get the selected start and end dates
+                start_date = start_date_entry.get_date()
+                end_date = end_date_entry.get_date()
+
+                # Convert dates to string format (YYYY-MM-DD)
+                start_date_str = start_date.strftime("%Y-%m-%d")
+                end_date_str = end_date.strftime("%Y-%m-%d")
+
+                # Filter tasks based on selected date range using filter_tasks_by_date function
+                self.filtry_sortowanie.tasks = self.filtry_sortowanie.filter_tasks_by_date(start_date_str, end_date_str)
+
+                try:
+                    # Save filtered tasks to the JSON file
+                    with open(TASKS_FILE, 'w', encoding='utf-8') as file:
+                        json.dump({"zadania": self.filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
+                    self.refresh_task_list()
+                    window.destroy()
+                    messagebox.showinfo("Success", "Tasks filtered and saved successfully!")
+                except:
+                    messagebox.showwarning("No tasks found", "No tasks match the selected date range.")
+
+
+
+            except Exception as e:
+                messagebox.showerror("Error", f"An error occurred: {e}")
+
+        tk.Button(window, text="Apply Filter", command=apply_filter).pack(pady=20)
 
     def sort_tasks_window(self):
         window = tk.Toplevel(self.root)
