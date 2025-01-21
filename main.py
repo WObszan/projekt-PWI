@@ -9,7 +9,7 @@ from categories_tags import CategoryTagManager
 import json
 import matplotlib.pyplot as plt  # Importujemy matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
+from tkcalendar import DateEntry
 # File path for tasks
 TASKS_FILE = "tasks.json"
 DEFAULT_EMAIL = "common.email@example.com"
@@ -91,6 +91,21 @@ class TaskManagerApp:
         else:
             messagebox.showerror("Error", f"Task with ID {task_id} not found.")
 
+
+
+    def load_categories(self):
+            """
+            Load available categories from the tasks JSON file.
+            """
+            try:
+                with open(TASKS_FILE, "r", encoding="utf-8") as file:
+                    data = json.load(file)
+                    # Extract unique categories from the tasks
+                    return list({task["kategoria"] for task in data.get("zadania", [])})
+            except (FileNotFoundError, json.JSONDecodeError):
+                # If the file doesn't exist or is invalid, return an empty list
+                return []
+
     def add_task_window(self):
         # Create a new window for adding tasks
         window = tk.Toplevel(self.root)
@@ -98,34 +113,58 @@ class TaskManagerApp:
         window.geometry("400x400")
 
         # Labels and entries for task attributes
-        tk.Label(window, text="Description:").pack(pady=5)
+        tk.Label(window, text="Description:").pack(pady=4)
         description_entry = tk.Entry(window)
-        description_entry.pack(pady=5)
+        description_entry.pack(pady=4)
 
-        tk.Label(window, text="Priority (wysoki, średni, niski):").pack(pady=5)
-        priority_entry = tk.Entry(window)
-        priority_entry.pack(pady=5)
+        tk.Label(window, text="Priority:").pack(pady=4)
+        priority_options = ["wysoki", "średni", "niski"]
+        priority_combobox = ttk.Combobox(window, values=priority_options, state="readonly")
+        priority_combobox.set("średni")  # Set default value
+        priority_combobox.pack(pady=4)
 
-        tk.Label(window, text="Deadline (YYYY-MM-DD):").pack(pady=5)
-        deadline_entry = tk.Entry(window)
-        deadline_entry.pack(pady=5)
+        tk.Label(window, text="Deadline (choose date):").pack(pady=4)
+        # Use DateEntry for selecting a date
+        deadline_entry = DateEntry(window, date_pattern="yyyy-MM-dd", width=12, background="black",
+                                   foreground="white", borderwidth=2)
+        deadline_entry.pack(pady=4)
 
         tk.Label(window, text="Time (HH:MM):").pack(pady=5)
-        time_entry = tk.Entry(window)
-        time_entry.pack(pady=5)
 
-        tk.Label(window, text="Category:").pack(pady=5)
-        category_entry = tk.Entry(window)
-        category_entry.pack(pady=5)
+        # Create a Frame to place hour and minute controls on the same row
+        time_frame = tk.Frame(window)
+        time_frame.pack(pady=4)
+
+        # Hour Spinbox (0 to 23)
+        hour_spinbox = tk.Spinbox(time_frame, from_=0, to=23, width=5)
+        hour_spinbox.pack(side="left", padx=5)
+        hour_spinbox.delete(0, 'end')  # Usuwamy domyślną wartość
+        hour_spinbox.insert(0, '12')  # Wstawiamy wartość '12'
+
+        # Minute Spinbox (0 to 59)
+        minute_spinbox = tk.Spinbox(time_frame, from_=0, to=59, width=5)
+        minute_spinbox.pack(side="left", padx=5)
+        minute_spinbox.delete(0, 'end')  # Usuwamy domyślną wartość
+        minute_spinbox.insert(0, '12')
+
+
+        tk.Label(window, text="Category:").pack(pady=4)
+        categories = self.load_categories()
+        category_combobox = ttk.Combobox(window, values=categories, state="normal")
+        category_combobox.pack(pady=4)
+
+
 
         def save_task():
             try:
                 id = max((task["id"] for task in self.filtry_sortowanie.tasks), default=0) + 1
                 description = description_entry.get()
-                priority = priority_entry.get().lower()
+                priority = priority_combobox.get()
                 deadline = deadline_entry.get()
-                time = time_entry.get()
-                category = category_entry.get()
+                hour = hour_spinbox.get()
+                minute = minute_spinbox.get()
+                time = f"{int(hour):02}:{int(minute):02}"
+                category = category_combobox.get()
                 status = "not completed"
 
                 # Validate inputs
@@ -158,7 +197,7 @@ class TaskManagerApp:
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to add task: {e}")
 
-        tk.Button(window, text="Save Task", command=save_task).pack(pady=20)
+        tk.Button(window, text="Save Task", command=save_task, width=10, height=1, font=("Helvetica", 10)).pack(pady=20)
 
     def remove_task_window(self):
         window = tk.Toplevel(self.root)
@@ -299,7 +338,8 @@ class TaskManagerApp:
         fig, ax = plt.subplots(figsize=(10, 8))
         ax.bar(category_labels, category_counts, color='blue')
 
-        # Ustawienie nazw kategorii w pionie
+        # Dodaj set_xticks przed set_xticklabels
+        ax.set_xticks(range(len(category_labels)))
         ax.set_xticklabels(category_labels, rotation=90)
 
         ax.set_title('Task Categories')
@@ -331,12 +371,17 @@ class TaskManagerApp:
         pass
 
     def refresh_task_list(self):
+        # Czyszczenie obecnych wpisów w widoku drzewa
         for item in self.task_tree.get_children():
             self.task_tree.delete(item)
+
+        # Dodawanie tylko zadań, które nie są ukończone
         for task in self.filtry_sortowanie.tasks:
-            self.task_tree.insert("", tk.END, values=(
-                task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"], task["kategoria"]
-            ))
+            if task["status"] != "completed":
+                self.task_tree.insert("", tk.END, values=(
+                    task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"],
+                    task["kategoria"]
+                ))
 
     def set_default_email(self):
         # Prompt the user to input a new default email
