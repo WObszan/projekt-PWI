@@ -246,6 +246,40 @@ class TaskManagerApp:
         self.chart_canvas.draw()
         self.chart_canvas.get_tk_widget().pack()
 
+    def sort_tasks_window(self):
+        window = tk.Toplevel(self.root)
+        window.title("Sort Tasks")
+        window.geometry("300x200")
+
+        tk.Label(window, text="Select sorting key:").pack(pady=5)
+        keys = ["id", "opis", "priorytet", "termin", "godzina", "status", "kategoria"]
+        key_var = tk.StringVar(value=keys[0])
+        key_menu = tk.OptionMenu(window, key_var, *keys)
+        key_menu.pack(pady=5)
+
+        tk.Label(window, text="Select sorting order:").pack(pady=5)
+        order_var = tk.StringVar(value="ascending")
+        ascending_radio = tk.Radiobutton(window, text="Ascending", variable=order_var, value="ascending")
+        ascending_radio.pack()
+        descending_radio = tk.Radiobutton(window, text="Descending", variable=order_var, value="descending")
+        descending_radio.pack()
+
+        def apply_sorting():
+            key = key_var.get()
+            order = order_var.get()
+            try:
+                reverse = True if order == "descending" else False
+                self.filtry_sortowanie.tasks.sort(key=lambda x: x.get(key, ""), reverse=reverse)
+                with open(TASKS_FILE, 'w', encoding='utf-8') as file:
+                    json.dump({"zadania": self.filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
+                self.refresh_task_list()
+                window.destroy()
+                messagebox.showinfo("Success", "Tasks sorted successfully!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to sort tasks: {e}")
+
+        tk.Button(window, text="Sort", command=apply_sorting).pack(pady=20)
+
     def plot_category_statistics(self):
         # Wykres dla kategorii
         categories_data = self.stats.c_by_categories()
