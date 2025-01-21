@@ -53,7 +53,7 @@ class TaskManagerApp:
         self.display_frame = tk.Frame(self.root, padx=10, pady=10)
         self.display_frame.pack(side=tk.RIGHT, expand=True, fill=tk.BOTH)
 
-        self.task_tree = ttk.Treeview(self.display_frame, columns=("ID", "Description", "Priority", "Deadline", "Time", "Status", "Category", "Email"), show="headings")
+        self.task_tree = ttk.Treeview(self.display_frame, columns=("ID", "Description", "Priority", "Deadline", "Time", "Status", "Category"), show="headings")
         for col in self.task_tree["columns"]:
             self.task_tree.heading(col, text=col)
             self.task_tree.column(col, width=100)
@@ -204,7 +204,7 @@ class TaskManagerApp:
             self.task_tree.delete(item)
         for task in self.filtry_sortowanie.tasks:
             self.task_tree.insert("", tk.END, values=(
-                task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"], task["kategoria"], task["email"]
+                task["id"], task["opis"], task["priorytet"], task["termin"], task["godzina"], task["status"], task["kategoria"]
             ))
 
     def set_default_email(self):
