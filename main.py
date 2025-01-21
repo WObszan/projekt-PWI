@@ -254,9 +254,17 @@ class TaskManagerApp:
         window.geometry("300x200")
 
         tk.Label(window, text="Select sorting key:").pack(pady=5)
-        keys = ["id", "opis", "priorytet", "termin", "godzina", "status", "kategoria"]
-        key_var = tk.StringVar(value=keys[0])
-        key_menu = tk.OptionMenu(window, key_var, *keys)
+        key_mapping = {
+            "ID": "id",
+            "Description": "opis",
+            "Priority": "priorytet",
+            "Deadline": "termin",
+            "Time": "godzina",
+            "Status": "status",
+            "Category": "kategoria"
+        }
+        key_var = tk.StringVar(value="ID")
+        key_menu = tk.OptionMenu(window, key_var, *key_mapping.keys())
         key_menu.pack(pady=5)
 
         tk.Label(window, text="Select sorting order:").pack(pady=5)
@@ -267,7 +275,7 @@ class TaskManagerApp:
         descending_radio.pack()
 
         def apply_sorting():
-            key = key_var.get()
+            key = key_mapping[key_var.get()]
             order = order_var.get()
             try:
                 reverse = True if order == "descending" else False
