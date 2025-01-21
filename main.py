@@ -31,6 +31,9 @@ class TaskManagerApp:
         # Setup GUI
         self.setup_gui()
 
+        # Load tasks into the GUI on startup
+        self.refresh_task_list()
+
     def setup_gui(self):
         # Frame for buttons
         button_frame = tk.Frame(self.root, padx=10, pady=10)
