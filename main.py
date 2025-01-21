@@ -293,8 +293,57 @@ class TaskManagerApp:
         self.chart_canvas.get_tk_widget().pack()
 
     def filter_tasks_window(self):
-        # Implement filtering functionality here
-        pass
+        window = tk.Toplevel(self.root)
+        window.title("Filter Tasks by Key")
+        window.geometry("300x250")
+
+        tk.Label(window, text="Select filtering key:").pack(pady=5)
+
+        # Mapa kluczy do tłumaczenia na nazwy w zadaniach
+        key_mapping = {
+            "Priority": "priorytet",
+            "Status": "status",
+            "Category": "kategoria",
+            "Description": "opis",
+            "Deadline": "termin",
+            "Time": "godzina",
+            "ID": "id"
+        }
+
+        key_var = tk.StringVar(value="Priority")
+        key_menu = tk.OptionMenu(window, key_var, *key_mapping.keys())
+        key_menu.pack(pady=5)
+
+        tk.Label(window, text="Enter value to filter by:").pack(pady=5)
+
+        # Pole tekstowe do podania wartości
+        filter_value_entry = tk.Entry(window)
+        filter_value_entry.pack(pady=5)
+
+        def apply_filter():
+            try:
+                # Pobierz wybrany klucz oraz wprowadzaną wartość
+                key = key_mapping[key_var.get()]
+                filter_value = filter_value_entry.get()
+
+                # Filtrowanie zadań na podstawie wybranego klucza i wartości
+
+
+                try:
+                    # Zapisz przefiltrowane zadania do pliku JSON
+                    self.filtry_sortowanie.tasks = self.filtry_sortowanie.filter_tasks(key, filter_value)
+                    with open(TASKS_FILE, 'w', encoding='utf-8') as file:
+                        json.dump({"zadania": self.filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
+                    self.refresh_task_list()
+                    window.destroy()
+                    messagebox.showinfo("Success", "Tasks filtered and saved successfully!")
+                except:
+                    messagebox.showwarning("No tasks found", "No tasks match the selected filter.")
+
+            except Exception as e:
+                messagebox.showerror("Error", f"An error occurred: {e}")
+
+        tk.Button(window, text="Apply Filter", command=apply_filter).pack(pady=20)
 
     def filter_tasks_date_window(self):
         window = tk.Toplevel(self.root)
