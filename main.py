@@ -204,21 +204,34 @@ class TaskManagerApp:
         window.title("Remove Task")
         window.geometry("300x200")
 
-        tk.Label(window, text="Enter Task ID to Remove:").pack(pady=5)
-        task_id_entry = tk.Entry(window)
-        task_id_entry.pack(pady=5)
+        tk.Label(window, text="Select Task to Remove:").pack(pady=5)
+
+        # Przygotowanie listy dostępnych zadań z ID i opisami
+        task_options = [f"{task['id']} - {task['opis']}" for task in self.filtry_sortowanie.tasks]
+
+        # ComboBox do wyboru zadania
+        task_combobox = ttk.Combobox(window, values=task_options, state="normal")
+        task_combobox.pack(pady=5)
 
         def remove_task():
-            try:
-                task_id = int(task_id_entry.get())
+            selected_task = task_combobox.get()
+            if selected_task:
+                task_id_str = selected_task.split(" - ")[0]  # Wyciągamy ID z wybranego tekstu
+                task_id = int(task_id_str)
+
+                # Usuwamy zadanie z listy
                 self.filtry_sortowanie.tasks = [task for task in self.filtry_sortowanie.tasks if task["id"] != task_id]
+
+                # Zapisujemy zmienioną listę zadań do pliku
                 with open(TASKS_FILE, 'w', encoding='utf-8') as file:
                     json.dump({"zadania": self.filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
+
+                # Odświeżamy listę zadań w GUI
                 self.refresh_task_list()
                 window.destroy()
                 messagebox.showinfo("Success", "Task removed successfully!")
-            except ValueError:
-                messagebox.showerror("Error", "Invalid Task ID!")
+            else:
+                messagebox.showerror("Error", "No task selected!")
 
         tk.Button(window, text="Remove Task", command=remove_task).pack(pady=20)
 
