@@ -2,7 +2,7 @@ import threading
 from datetime import datetime
 from filtry_sortowanie import FiltrySortowanie
 from powiadomienia import SendingReminder
-from statystyki import TaskStats
+from statystyki import *
 from categories_tags import CategoryTagManager
 import json
 
@@ -45,6 +45,7 @@ def main():
             email = input("Enter email for reminders: ")
             status = "nie zrobione"
             kategoria = input("Enter category: ")
+            global_stats("stats.json",kategoria)
 
             new_task = {
                 "id": id,
@@ -93,6 +94,7 @@ def main():
 
         elif choice == "6":
             # View task statistics
+            stats.update(TASKS_FILE)
             print("Task Count by Status:")
             print(stats.c_by_status())
             print("\nTask Count by Category:")
