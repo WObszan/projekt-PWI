@@ -318,7 +318,7 @@ class TaskManagerApp:
             order = order_var.get()
             try:
                 reverse = True if order == "descending" else False
-                self.filtry_sortowanie.sort_tasks(key, reverse)
+                self.filtry_sortowanie.tasks = self.filtry_sortowanie.sort_tasks(key, reverse)
                 with open(TASKS_FILE, 'w', encoding='utf-8') as file:
                     json.dump({"zadania": self.filtry_sortowanie.tasks}, file, ensure_ascii=False, indent=4)
                 self.refresh_task_list()
