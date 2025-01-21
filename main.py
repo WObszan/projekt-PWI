@@ -367,8 +367,62 @@ class TaskManagerApp:
         self.chart_canvas.get_tk_widget().pack()
 
     def manage_categories_window(self):
-        # Implement category management functionality here
-        pass
+        # Tworzenie nowego okna do zarządzania kategoriami
+        window = tk.Toplevel(self.root)
+        window.title("Manage Categories")
+        window.geometry("400x300")
+
+        tk.Label(window, text="Manage Categories", font=("Helvetica", 14)).pack(pady=10)
+
+        # Lista kategorii w oknie
+        category_listbox = tk.Listbox(window, selectmode=tk.SINGLE)
+        category_listbox.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
+
+        # Pobranie kategorii z CategoryTagManager
+        categories = self.category_manager.view_categories()
+        for category in categories:
+            category_listbox.insert(tk.END, category)
+
+        def add_category():
+            """Dodawanie nowej kategorii."""
+            new_category = simpledialog.askstring("Add Category", "Enter the name of the new category:")
+            if new_category and new_category.strip():
+                if new_category in categories:
+                    messagebox.showerror("Error", f"Category '{new_category}' already exists.")
+                else:
+                    try:
+                        self.category_manager.add_category(new_category)
+                        category_listbox.insert(tk.END, new_category)
+                        categories.append(new_category)
+                        messagebox.showinfo("Success", f"Category '{new_category}' added successfully!")
+                    except Exception as e:
+                        messagebox.showerror("Error", f"Failed to add category: {e}")
+            else:
+                messagebox.showerror("Error", "Category name cannot be empty.")
+
+        def remove_category():
+            """Usuwanie wybranej kategorii."""
+            selected = category_listbox.curselection()
+            if selected:
+                category = category_listbox.get(selected[0])
+                try:
+                    self.category_manager.remove_category(category)
+                    category_listbox.delete(selected)
+                    categories.remove(category)
+                    messagebox.showinfo("Success", f"Category '{category}' removed successfully!")
+                except Exception as e:
+                    messagebox.showerror("Error", f"Failed to remove category: {e}")
+            else:
+                messagebox.showerror("Error", "No category selected.")
+
+        # Przyciski do zarządzania kategoriami
+        button_frame = tk.Frame(window)
+        button_frame.pack(pady=10)
+
+        tk.Button(button_frame, text="Add Category", command=add_category, width=15).pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="Remove Category", command=remove_category, width=15).pack(side=tk.LEFT, padx=5)
+
+        tk.Button(window, text="Close", command=window.destroy, width=15).pack(pady=10)
 
     def refresh_task_list(self):
         # Czyszczenie obecnych wpisów w widoku drzewa
