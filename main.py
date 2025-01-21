@@ -45,6 +45,7 @@ class TaskManagerApp:
         tk.Button(button_frame, text="Set Default Email", command=self.set_default_email, width=20).pack(pady=5)
         tk.Button(button_frame, text="Add Task", command=self.add_task_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Remove Task", command=self.remove_task_window, width=20).pack(pady=5)
+        tk.Button(button_frame, text="Filter Tasks by Key", command=self.filter_tasks_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Filter Tasks by Date", command=self.filter_tasks_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Sort Tasks", command=self.sort_tasks_window, width=20).pack(pady=5)
         tk.Button(button_frame, text="Task Statistics", command=self.view_statistics, width=20).pack(pady=5)
@@ -185,13 +186,6 @@ class TaskManagerApp:
     def view_all_tasks(self):
         self.refresh_task_list()
 
-    def filter_tasks_window(self):
-        # Implement filtering functionality here
-        pass
-
-    def sort_tasks_window(self):
-        # Implement sorting functionality here
-        pass
 
     def view_statistics(self):
         # Sprawdzamy, czy wykres jest już widoczny i ukrywamy go jeśli tak
@@ -245,6 +239,14 @@ class TaskManagerApp:
         self.chart_canvas = FigureCanvasTkAgg(fig, master=self.root)
         self.chart_canvas.draw()
         self.chart_canvas.get_tk_widget().pack()
+
+    def filter_tasks_window(self):
+        # Implement filtering functionality here
+        pass
+
+    def filter_tasks_date_window(self):
+        # Implement filtering functionality here
+        pass
 
     def sort_tasks_window(self):
         window = tk.Toplevel(self.root)
