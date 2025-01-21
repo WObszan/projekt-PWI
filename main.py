@@ -7,6 +7,8 @@ from powiadomienia import SendingReminder
 from statystyki import TaskStats
 from categories_tags import CategoryTagManager
 import json
+import matplotlib.pyplot as plt  # Importujemy matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 # File path for tasks
 TASKS_FILE = "tasks.json"
@@ -17,13 +19,13 @@ class TaskManagerApp:
         self.root = root
         self.root.title("Task Management Application")
         self.root.geometry("1200x600")
-        
+
         # Initialize necessary classes
         self.filtry_sortowanie = FiltrySortowanie(TASKS_FILE)
         self.reminder = SendingReminder(TASKS_FILE)
         self.stats = TaskStats(TASKS_FILE)
         self.category_manager = CategoryTagManager(TASKS_FILE)
-        
+
         # Start the reminder system in a separate thread
         reminder_thread = threading.Thread(target=self.reminder.run_in_background, args=(TASKS_FILE,), daemon=True)
         reminder_thread.start()
@@ -77,7 +79,7 @@ class TaskManagerApp:
                 task["status"] = "completed"
                 task_found = True
                 break
-        
+
         if task_found:
             # Save updated tasks to file
             with open(TASKS_FILE, 'w', encoding='utf-8') as file:
@@ -192,8 +194,93 @@ class TaskManagerApp:
         pass
 
     def view_statistics(self):
-        # Implement statistics functionality here
-        pass
+        # Sprawdzamy, czy wykres jest już widoczny i ukrywamy go jeśli tak
+        if hasattr(self, 'chart_canvas') and self.chart_canvas.get_tk_widget().winfo_ismapped():
+            self.chart_canvas.get_tk_widget().pack_forget()
+
+        # Tworzymy nowe okno wyboru statystyki
+        stat_window = tk.Toplevel(self.root)
+        stat_window.title("Select Statistic Type")
+        stat_window.geometry("300x200")
+
+        # Opis dostępnych statystyk
+        tk.Label(stat_window, text="Select the statistics to display:").pack(pady=10)
+
+        # Lista dostępnych opcji statystyk
+        options = ["Status", "Category", "Deadline"]
+        stat_choice = tk.StringVar(stat_window)
+        stat_choice.set(options[0])  # Domyślnie wybrana opcja
+
+        # Tworzymy rozwijane menu z opcjami
+        option_menu = tk.OptionMenu(stat_window, stat_choice, *options)
+        option_menu.pack(pady=10)
+
+        # Funkcja do generowania wykresu na podstawie wybranej opcji
+        def show_chart():
+            selected_stat = stat_choice.get()
+            if selected_stat == "Status":
+                self.plot_status_statistics()  # Rysowanie wykresu dla statusu
+            elif selected_stat == "Category":
+                self.plot_category_statistics()  # Rysowanie wykresu dla kategorii
+            elif selected_stat == "Deadline":
+                self.plot_deadline_statistics()  # Rysowanie wykresu dla deadline
+            stat_window.destroy()  # Zamykamy okno wyboru po narysowaniu wykresu
+
+        # Przycisk do zatwierdzenia wyboru
+        tk.Button(stat_window, text="Show Statistics", command=show_chart).pack(pady=20)
+
+    def plot_status_statistics(self):
+        # Wykres dla statusu (wykorzystanie istniejącej funkcji)
+        status_data = self.stats.c_by_status()
+        status_labels = list(status_data.keys())
+        status_counts = list(status_data.values())
+        colors = ['green' if status == 'completed' else 'red' for status in status_labels]
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.bar(status_labels, status_counts, color=colors)
+        ax.set_title('Task Statuses')
+        ax.set_xlabel('Status')
+        ax.set_ylabel('Count')
+
+        self.chart_canvas = FigureCanvasTkAgg(fig, master=self.root)
+        self.chart_canvas.draw()
+        self.chart_canvas.get_tk_widget().pack()
+
+    def plot_category_statistics(self):
+        # Wykres dla kategorii
+        categories_data = self.stats.c_by_categories()
+        category_labels = list(categories_data.keys())
+        category_counts = list(categories_data.values())
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.bar(category_labels, category_counts, color='blue')
+
+        # Ustawienie nazw kategorii w pionie
+        ax.set_xticklabels(category_labels, rotation=90)
+
+        ax.set_title('Task Categories')
+        ax.set_xlabel('Category')
+        ax.set_ylabel('Count')
+
+        self.chart_canvas = FigureCanvasTkAgg(fig, master=self.root)
+        self.chart_canvas.draw()
+        self.chart_canvas.get_tk_widget().pack()
+
+    def plot_deadline_statistics(self):
+        # Wykres dla deadline (ile zadań do zrobienia dzisiaj, jutro, w tym tygodniu)
+        deadline_data = self.stats.close_to_deadline()
+        deadline_labels = list(deadline_data.keys())
+        deadline_counts = list(deadline_data.values())
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.bar(deadline_labels, deadline_counts, color='purple')
+        ax.set_title('Tasks Close to Deadline')
+        ax.set_xlabel('Deadline')
+        ax.set_ylabel('Count')
+
+        self.chart_canvas = FigureCanvasTkAgg(fig, master=self.root)
+        self.chart_canvas.draw()
+        self.chart_canvas.get_tk_widget().pack()
 
     def manage_categories_window(self):
         # Implement category management functionality here
@@ -214,6 +301,7 @@ class TaskManagerApp:
             global DEFAULT_EMAIL
             DEFAULT_EMAIL = new_email
             messagebox.showinfo("Success", f"Default email set to: {DEFAULT_EMAIL}")
+
 
 
 # Main function
