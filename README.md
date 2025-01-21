@@ -6,8 +6,9 @@
 
 Aby uruchomić projekt, musisz utworzyć plik `.env` w głównym katalogu projektu i dodać do niego swoje dane:
 1. W terminalu pobierz paczke dotenv wpisując kod: pip install python-dotenv
-2. Skopiuj plik `.env.example` do `.env`.
-3. Wypełnij zmienne środowiskowe:
+2. Przy okazji pobierz paczkę matplotlib wpisujac kod: pip install matplotlib
+3. Skopiuj plik `.env.example` do `.env`.
+4. Wypełnij zmienne środowiskowe:
    - `MY_EMAIL`: Twój adres e-mail.
    - `APP_PASSWORD`: Hasło aplikacji wygenerowane w ustawieniach Gmaila.
 
